@@ -1,287 +1,7 @@
-<!DOCTYPE html><html lang="fr" style="scroll-behavior: smooth;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style rel="stylesheet" type="text/css">@charset "utf-8";
-
-*, ::before, ::after { margin: 0px; padding: 0px; box-sizing: border-box; }
-
-:root { --red: #E31837; --red-dark: #B01230; --yellow: #FFC72C; --black: #0A0A0A; --dark: #111111; --grey: #2A2A2A; --white: #FAFAFA; --cream: #FFF8E7; --font-display: 'Bebas Neue', sans-serif; --font-serif: 'Playfair Display', serif; --font-body: 'DM Sans', sans-serif; }
-
-html { scroll-behavior: smooth; }
-
-body { font-family: var(--font-body); background: var(--black); color: var(--white); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-
-.navbar { position: fixed; top: 0px; left: 0px; width: 100%; z-index: 1000; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; transition: background 0.4s, backdrop-filter 0.4s, padding 0.4s; }
-
-.navbar.scrolled { background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(20px); padding: 0.7rem 2rem; border-bottom: 1px solid rgba(255, 199, 44, 0.1); }
-
-.nav-logo { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 3px; color: var(--yellow); text-decoration: none; }
-
-.nav-logo span { color: var(--red); }
-
-.nav-links { display: flex; gap: 2rem; align-items: center; list-style: none; }
-
-.nav-links a { color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; transition: color 0.3s; }
-
-.nav-links a:hover { color: var(--yellow); }
-
-.nav-cta { background: var(--red); padding: 0.6rem 1.5rem; border-radius: 50px; color: white !important; font-weight: 700 !important; transition: transform 0.3s, box-shadow 0.3s, background 0.3s !important; }
-
-.nav-cta:hover { transform: scale(1.05); box-shadow: rgba(227, 24, 55, 0.4) 0px 0px 30px; background: var(--red-dark) !important; }
-
-.nav-hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; background: none; border: none; }
-
-.nav-hamburger span { width: 28px; height: 2px; background: var(--white); transition: 0.3s; display: block; }
-
-.hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background: radial-gradient(ellipse at 50% 0%, #2a0a0a 0%, var(--black) 70%); }
-
-.hero-grain { position: absolute; inset: 0px; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 1; }
-
-.hero-content { position: relative; z-index: 10; text-align: center; padding: 0px 2rem; }
-
-.hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255, 199, 44, 0.1); border: 1px solid rgba(255, 199, 44, 0.2); border-radius: 50px; padding: 0.5rem 1.2rem; font-size: 0.8rem; color: var(--yellow); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 2rem; }
-
-.hero-title { font-family: var(--font-display); font-size: clamp(4rem, 14vw, 12rem); line-height: 0.9; letter-spacing: 6px; color: var(--white); margin-bottom: 0.5rem; }
-
-.hero-title .accent { color: var(--yellow); }
-
-.hero-subtitle { font-family: var(--font-serif); font-style: italic; font-size: clamp(1.1rem, 2.5vw, 1.8rem); color: rgba(255, 255, 255, 0.6); margin-bottom: 2.5rem; font-weight: 400; }
-
-.hero-cta-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-
-.btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--red); color: white; padding: 1rem 2.5rem; border-radius: 60px; font-size: 1rem; font-weight: 700; text-decoration: none; letter-spacing: 1px; text-transform: uppercase; border: none; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; }
-
-.btn-primary:hover { transform: scale(1.05); box-shadow: rgba(227, 24, 55, 0.5) 0px 10px 40px; }
-
-.btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--white); padding: 1rem 2.5rem; border-radius: 60px; font-size: 1rem; font-weight: 500; text-decoration: none; letter-spacing: 1px; border: 1px solid rgba(255, 255, 255, 0.2); transition: border-color 0.3s, background 0.3s; }
-
-.btn-secondary:hover { border-color: var(--yellow); background: rgba(255, 199, 44, 0.05); }
-
-.float-emoji { position: absolute; font-size: 4rem; z-index: 5; opacity: 0.15; will-change: transform; pointer-events: none; }
-
-.fe-1 { top: 15%; left: 8%; font-size: 5rem; }
-
-.fe-2 { top: 25%; right: 10%; font-size: 6rem; }
-
-.fe-3 { bottom: 20%; left: 12%; font-size: 4.5rem; }
-
-.fe-4 { bottom: 15%; right: 8%; font-size: 5.5rem; }
-
-.fe-5 { top: 50%; left: 3%; font-size: 3.5rem; }
-
-.fe-6 { top: 10%; right: 25%; font-size: 3rem; }
-
-.scroll-indicator { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
-
-.scroll-indicator span { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(255, 255, 255, 0.3); }
-
-.scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--yellow), transparent); animation: 2s ease-in-out 0s infinite normal none running scrollPulse; }
-
-@keyframes scrollPulse { 
-  0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
-  50% { opacity: 1; transform: scaleY(1); }
-}
-
-.showcase { position: relative; padding: 8rem 2rem; overflow: hidden; }
-
-.showcase-dark { background: var(--dark); }
-
-.showcase-header { text-align: center; max-width: 700px; margin: 0px auto 5rem; }
-
-.showcase-header .label { font-size: 0.8rem; letter-spacing: 4px; text-transform: uppercase; color: var(--yellow); margin-bottom: 1rem; display: block; }
-
-.showcase-header h2 { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 5rem); letter-spacing: 3px; line-height: 1; margin-bottom: 1.5rem; }
-
-.showcase-header p { font-size: 1.1rem; line-height: 1.7; opacity: 0.7; }
-
-.parallax-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1200px; margin: 0px auto; }
-
-.parallax-card { position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 3 / 4; cursor: pointer; }
-
-.parallax-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-
-.parallax-card:hover img { transform: scale(1.08); }
-
-.card-overlay { position: absolute; inset: 0px; background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; }
-
-.card-overlay h3 { font-family: var(--font-display); font-size: 1.8rem; letter-spacing: 2px; color: var(--yellow); }
-
-.card-overlay p { font-size: 0.85rem; color: rgba(255, 255, 255, 0.7); margin-top: 0.3rem; }
-
-.food-float-section { position: relative; padding: 10rem 2rem; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--black); }
-
-.food-float-text { position: relative; z-index: 10; text-align: center; max-width: 600px; }
-
-.food-float-text h2 { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 7rem); letter-spacing: 4px; line-height: 0.95; margin-bottom: 1.5rem; }
-
-.food-float-text h2 .yellow { color: var(--yellow); }
-
-.food-float-text p { font-size: 1.1rem; opacity: 0.6; line-height: 1.7; }
-
-.floating-img { position: absolute; border-radius: 20px; overflow: hidden; box-shadow: rgba(0, 0, 0, 0.5) 0px 30px 80px; will-change: transform; }
-
-.floating-img img { width: 100%; height: 100%; object-fit: cover; }
-
-.fi-1 { width: 280px; height: 280px; top: 8%; left: 5%; }
-
-.fi-2 { width: 220px; height: 300px; top: 5%; right: 8%; }
-
-.fi-3 { width: 250px; height: 250px; bottom: 10%; left: 8%; }
-
-.fi-4 { width: 200px; height: 260px; bottom: 8%; right: 5%; }
-
-.menu-section { padding: 8rem 2rem; background: var(--cream); color: var(--black); position: relative; }
-
-.menu-section::before { content: "🍗"; position: absolute; top: 4rem; right: 4rem; font-size: 6rem; opacity: 0.08; }
-
-.menu-section .label { color: var(--red); }
-
-.menu-container { max-width: 1100px; margin: 0px auto; }
-
-.menu-category { margin-bottom: 4rem; }
-
-.menu-category-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 2px solid var(--red); }
-
-.cat-emoji { font-size: 2rem; }
-
-.menu-category-header h3 { font-family: var(--font-display); font-size: 2rem; letter-spacing: 3px; color: var(--red); }
-
-.menu-items { display: flex; flex-direction: column; gap: 0.8rem; }
-
-.menu-item { display: flex; align-items: flex-start; justify-content: space-between; padding: 1rem 1.2rem; background: white; border-radius: 12px; transition: transform 0.3s, box-shadow 0.3s; }
-
-.menu-item:hover { transform: translateY(-2px); box-shadow: rgba(0, 0, 0, 0.08) 0px 8px 30px; }
-
-.menu-item-info { flex: 1 1 0%; }
-
-.menu-item-name { font-weight: 700; font-size: 1rem; color: var(--black); margin-bottom: 0.2rem; }
-
-.menu-item-desc { font-size: 0.8rem; color: rgb(136, 136, 136); }
-
-.menu-item-price { font-family: var(--font-display); font-size: 1.4rem; color: var(--red); white-space: nowrap; margin-left: 1rem; letter-spacing: 1px; }
-
-.cta-section { position: relative; padding: 10rem 2rem; text-align: center; overflow: hidden; background: linear-gradient(135deg, var(--red) 0%, #8B0000 100%); }
-
-.cta-bg-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: var(--font-display); font-size: clamp(8rem, 20vw, 20rem); color: rgba(255, 255, 255, 0.04); white-space: nowrap; letter-spacing: 10px; pointer-events: none; }
-
-.cta-section h2 { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 5rem); letter-spacing: 4px; position: relative; z-index: 2; margin-bottom: 1rem; }
-
-.cta-section p { font-size: 1.2rem; opacity: 0.8; margin-bottom: 2.5rem; position: relative; z-index: 2; }
-
-.btn-yellow { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--yellow); color: var(--black); padding: 1.2rem 3rem; border-radius: 60px; font-size: 1.1rem; font-weight: 700; text-decoration: none; letter-spacing: 2px; text-transform: uppercase; border: none; cursor: pointer; position: relative; z-index: 2; transition: transform 0.3s, box-shadow 0.3s; }
-
-.btn-yellow:hover { transform: scale(1.08); box-shadow: rgba(255, 199, 44, 0.4) 0px 10px 40px; }
-
-.locations-section { padding: 8rem 2rem; background: var(--dark); }
-
-.locations-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; max-width: 900px; margin: 3rem auto 0px; }
-
-.location-card { background: var(--grey); border-radius: 20px; padding: 2.5rem; border: 1px solid rgba(255, 255, 255, 0.05); transition: border-color 0.3s; }
-
-.location-card:hover { border-color: var(--yellow); }
-
-.loc-icon { font-size: 2.5rem; margin-bottom: 1rem; }
-
-.location-card h3 { font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 2px; color: var(--yellow); margin-bottom: 1rem; }
-
-.location-card p { font-size: 0.9rem; color: rgba(255, 255, 255, 0.6); line-height: 1.8; }
-
-.location-card a { color: var(--yellow); text-decoration: none; }
-
-footer { padding: 4rem 2rem 2rem; background: var(--black); border-top: 1px solid rgba(255, 255, 255, 0.05); text-align: center; }
-
-.footer-logo { font-family: var(--font-display); font-size: 2rem; letter-spacing: 4px; color: var(--yellow); margin-bottom: 1.5rem; }
-
-.footer-logo span { color: var(--red); }
-
-.footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap; }
-
-.footer-links a { color: rgba(255, 255, 255, 0.5); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
-
-.footer-links a:hover { color: var(--yellow); }
-
-.footer-copy { font-size: 0.75rem; color: rgba(255, 255, 255, 0.25); }
-
-.mobile-menu { display: none; position: fixed; inset: 0px; background: rgba(10, 10, 10, 0.97); z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
-
-.mobile-menu.active { display: flex; }
-
-.mobile-menu a { font-family: var(--font-display); font-size: 2rem; letter-spacing: 4px; color: var(--white); text-decoration: none; transition: color 0.3s; }
-
-.mobile-menu a:hover { color: var(--yellow); }
-
-.mobile-close { position: absolute; top: 2rem; right: 2rem; font-size: 2rem; color: white; cursor: pointer; background: none; border: none; }
-
-@media (max-width: 900px) {
-  .parallax-grid { grid-template-columns: 1fr 1fr; }
-  .locations-grid { grid-template-columns: 1fr; }
-  .fi-1, .fi-2 { width: 160px; height: 160px; }
-  .fi-3, .fi-4 { width: 140px; height: 180px; }
-}
-
-@media (max-width: 768px) {
-  .nav-links { display: none; }
-  .nav-hamburger { display: flex; }
-  .parallax-grid { grid-template-columns: 1fr; max-width: 400px; }
-  .parallax-card { aspect-ratio: 4 / 3; }
-  .floating-img { opacity: 0.3; }
-}
-
-.whatsapp-float { position: fixed; bottom: 2rem; right: 2rem; z-index: 900; width: 60px; height: 60px; background: rgb(37, 211, 102); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: rgba(37, 211, 102, 0.4) 0px 4px 20px; transition: transform 0.3s, box-shadow 0.3s; text-decoration: none; }
-
-.whatsapp-float:hover { transform: scale(1.1); box-shadow: rgba(37, 211, 102, 0.6) 0px 6px 30px; }
-
-.whatsapp-float svg { width: 32px; height: 32px; fill: white; }
-
-.loc-actions { display: flex; gap: 0.6rem; margin-top: 1.2rem; flex-wrap: wrap; }
-
-.loc-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.75rem; font-weight: 700; text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px; transition: transform 0.2s, box-shadow 0.2s; }
-
-.loc-btn:hover { transform: translateY(-1px); }
-
-.loc-btn-whatsapp { background: rgb(37, 211, 102); color: white; }
-
-.loc-btn-whatsapp:hover { box-shadow: rgba(37, 211, 102, 0.4) 0px 4px 15px; }
-
-.loc-btn-map { background: var(--yellow); color: var(--black); }
-
-.loc-btn-map:hover { box-shadow: rgba(255, 199, 44, 0.4) 0px 4px 15px; }
-
-.loc-btn-call { background: var(--red); color: white; }
-
-.loc-btn-call:hover { box-shadow: rgba(227, 24, 55, 0.4) 0px 4px 15px; }
-
-.maps-container { max-width: 900px; margin: 3rem auto 0px; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-
-.map-wrap { border-radius: 16px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05); aspect-ratio: 4 / 3; }
-
-.map-wrap iframe { width: 100%; height: 100%; border: 0px; }
-
-@media (max-width: 768px) {
-  .maps-container { grid-template-columns: 1fr; }
-}
-
-.info-bar { background: var(--grey); padding: 3rem 2rem; }
-
-.info-grid { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; max-width: 900px; margin: 0px auto; text-align: center; }
-
-.info-item { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
-
-.info-icon { font-size: 1.5rem; }
-
-.info-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: rgba(255, 255, 255, 0.4); }
-
-.info-value { font-weight: 700; font-size: 0.95rem; color: var(--yellow); }
-
-.seo-about { max-width: 700px; margin: 3rem auto 0px; text-align: center; }
-
-.seo-about p { font-size: 0.85rem; color: rgba(255, 255, 255, 0.4); line-height: 1.8; }
-
-.reveal { opacity: 0; transform: translateY(60px); }
-
-.reveal-left { opacity: 0; transform: translateX(-80px); }
-
-.reveal-right { opacity: 0; transform: translateX(80px); }
-
-.reveal-scale { opacity: 0; transform: scale(0.85); }</style>
-    
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chicken Master — Le Meilleur Poulet Frit de Dakar | Fass &amp; Yoff</title>
     <meta name="description" content="Chicken Master Dakar — Poulet frit croustillant, burgers, nuggets, wraps et frites. 2 adresses : Cheikh Anta Diop (Fass) et Yoff. Ouvert de 9h à minuit. Commandez par WhatsApp ou téléphone.">
@@ -291,171 +11,542 @@ footer { padding: 4rem 2rem 2rem; background: var(--black); border-top: 1px soli
     <meta property="og:type" content="restaurant">
     <meta property="og:locale" content="fr_SN">
     <link rel="preconnect" href="https://fonts.googleapis.com/">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&amp;family=Playfair+Display:ital,wght@0,700;0,900;1,700&amp;display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    
+    <!-- STYLES PLACEHOLDER -->
+    <style>
+    /* === RESET & VARIABLES === */
+    *, ::before, ::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+        --red: #E31837; --red-glow: rgba(227,24,55,0.35);
+        --yellow: #FFC72C; --yellow-glow: rgba(255,199,44,0.3);
+        --black: #060606; --dark: #0e0e0e; --grey: #1a1a1a;
+        --white: #f5f5f5; --cream: #FFF8E7;
+        --glass-bg: rgba(255,255,255,0.04);
+        --glass-border: rgba(255,255,255,0.08);
+        --font-display: 'Syne', sans-serif;
+        --font-body: 'Outfit', sans-serif;
+        --font-accent: 'Playfair Display', serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--black); color: var(--white); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+    /* === ANIMATED MESH GRADIENT HERO BG === */
+    .hero-mesh { position: absolute; inset: 0; overflow: hidden; z-index: 0; }
+    .hero-mesh .blob {
+        position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.5;
+        will-change: transform; animation: blobMove 12s ease-in-out infinite alternate;
+    }
+    .blob-1 { width: 600px; height: 600px; background: var(--red); top: -20%; left: -10%; animation-delay: 0s; }
+    .blob-2 { width: 500px; height: 500px; background: #ff6b00; top: 30%; right: -15%; animation-delay: -4s; }
+    .blob-3 { width: 450px; height: 450px; background: var(--yellow); bottom: -25%; left: 30%; animation-delay: -8s; opacity: 0.3; }
+    @keyframes blobMove {
+        0% { transform: translate(0,0) scale(1); }
+        33% { transform: translate(40px,-30px) scale(1.1); }
+        66% { transform: translate(-20px,40px) scale(0.95); }
+        100% { transform: translate(30px,20px) scale(1.05); }
+    }
+    .hero-grain {
+        position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0.06;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .hero-vignette {
+        position: absolute; inset: 0; z-index: 2; pointer-events: none;
+        background: radial-gradient(ellipse at center, transparent 40%, var(--black) 100%);
+    }
+
+    /* === GLASS NAVBAR === */
+    .navbar {
+        position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+        padding: 1.2rem 2.5rem; display: flex; align-items: center; justify-content: space-between;
+        transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
+    }
+    .navbar.scrolled {
+        padding: 0.7rem 2.5rem;
+        background: rgba(6,6,6,0.6);
+        backdrop-filter: blur(24px) saturate(180%);
+        border-bottom: 1px solid var(--glass-border);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    .nav-logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; letter-spacing: 2px; color: var(--white); text-decoration: none; }
+    .nav-logo .r { color: var(--red); }
+    .nav-logo .y { color: var(--yellow); }
+    .nav-links { display: flex; gap: 2rem; align-items: center; list-style: none; }
+    .nav-links a {
+        color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.82rem;
+        letter-spacing: 1.5px; text-transform: uppercase; font-weight: 500;
+        transition: color 0.3s; position: relative;
+    }
+    .nav-links a::after {
+        content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1.5px;
+        background: var(--yellow); transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+        background: var(--red) !important; padding: 0.55rem 1.4rem; border-radius: 8px;
+        color: white !important; font-weight: 700 !important;
+        transition: transform 0.3s, box-shadow 0.3s !important;
+    }
+    .nav-cta:hover { transform: translateY(-2px) !important; box-shadow: 0 6px 24px var(--red-glow) !important; }
+    .nav-cta::after { display: none !important; }
+    .nav-hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; background: none; border: none; }
+    .nav-hamburger span { width: 26px; height: 2px; background: var(--white); display: block; transition: 0.3s; }
+
+    /* === HERO === */
+    .hero {
+        position: relative; min-height: 100vh; display: flex; align-items: center;
+        justify-content: center; overflow: hidden;
+    }
+    .hero-content { position: relative; z-index: 10; text-align: center; padding: 0 2rem; }
+    .hero-badge {
+        display: inline-flex; align-items: center; gap: 0.6rem;
+        background: var(--glass-bg); border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px); border-radius: 8px;
+        padding: 0.55rem 1.3rem; font-size: 0.78rem; font-weight: 500;
+        color: var(--yellow); letter-spacing: 2.5px; text-transform: uppercase;
+        margin-bottom: 2.5rem;
+    }
+    .hero-title {
+        font-family: var(--font-display); font-weight: 800;
+        font-size: clamp(4.5rem, 15vw, 13rem); line-height: 0.88;
+        letter-spacing: -2px; margin-bottom: 0.8rem;
+    }
+    .hero-title .line { display: block; }
+    .hero-title .accent { color: var(--yellow); }
+    .hero-subtitle {
+        font-family: var(--font-accent); font-style: italic; font-weight: 600;
+        font-size: clamp(1rem, 2.5vw, 1.6rem); color: rgba(255,255,255,0.5);
+        margin-bottom: 3rem;
+    }
+    .hero-cta-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* === BUTTONS === */
+    .btn-primary {
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        background: var(--red); color: white; padding: 1rem 2.5rem;
+        border-radius: 10px; font-size: 0.95rem; font-weight: 700;
+        text-decoration: none; letter-spacing: 1px; text-transform: uppercase;
+        border: none; cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px var(--red-glow); }
+    .btn-glass {
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        background: var(--glass-bg); color: var(--white); padding: 1rem 2.5rem;
+        border-radius: 10px; font-size: 0.95rem; font-weight: 500;
+        text-decoration: none; letter-spacing: 1px;
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        transition: all 0.3s;
+    }
+    .btn-glass:hover { background: rgba(255,255,255,0.08); border-color: var(--yellow); color: var(--yellow); }
+    .btn-yellow {
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        background: var(--yellow); color: var(--black); padding: 1.1rem 2.8rem;
+        border-radius: 10px; font-size: 1rem; font-weight: 700;
+        text-decoration: none; letter-spacing: 1.5px; text-transform: uppercase;
+        border: none; cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .btn-yellow:hover { transform: translateY(-3px); box-shadow: 0 12px 40px var(--yellow-glow); }
+
+    .scroll-indicator { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+    .scroll-indicator span { font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.25); font-weight: 500; }
+    .scroll-line { width: 1px; height: 36px; background: linear-gradient(to bottom, var(--yellow), transparent); animation: scrollPulse 2.5s ease-in-out infinite; }
+    @keyframes scrollPulse { 0%,100% { opacity: 0.2; transform: scaleY(0.4); } 50% { opacity: 1; transform: scaleY(1); } }
+
+    /* === SECTION HEADERS === */
+    .section-header { text-align: center; max-width: 700px; margin: 0 auto 5rem; }
+    .section-header .label {
+        font-size: 0.75rem; letter-spacing: 5px; text-transform: uppercase;
+        color: var(--yellow); margin-bottom: 1.2rem; display: block; font-weight: 600;
+    }
+    .section-header h2 {
+        font-family: var(--font-display); font-weight: 800;
+        font-size: clamp(2.5rem, 6vw, 4.5rem); letter-spacing: -1px; line-height: 1;
+        margin-bottom: 1.5rem;
+    }
+    .section-header p { font-size: 1.05rem; line-height: 1.8; opacity: 0.5; font-weight: 300; }
+
+    /* === ABOUT / FOOD FLOAT SECTION === */
+    .food-float-section {
+        position: relative; padding: 12rem 2rem; min-height: 100vh;
+        display: flex; align-items: center; justify-content: center;
+        overflow: hidden; background: var(--black);
+    }
+    .food-float-text { position: relative; z-index: 10; text-align: center; max-width: 600px; }
+    .food-float-text h2 {
+        font-family: var(--font-display); font-weight: 800;
+        font-size: clamp(3rem, 8vw, 7rem); letter-spacing: -1px; line-height: 0.92;
+        margin-bottom: 1.5rem;
+    }
+    .food-float-text h2 .yellow { color: var(--yellow); }
+    .food-float-text p { font-size: 1.05rem; opacity: 0.45; line-height: 1.8; font-weight: 300; }
+    .floating-img {
+        position: absolute; overflow: hidden; will-change: transform;
+        box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+        border: 1px solid var(--glass-border); border-radius: 16px;
+    }
+    .floating-img img { width: 100%; height: 100%; object-fit: cover; }
+    .fi-1 { width: 280px; height: 280px; top: 8%; left: 5%; border-radius: 16px; }
+    .fi-2 { width: 220px; height: 300px; top: 5%; right: 8%; border-radius: 16px; }
+    .fi-3 { width: 250px; height: 250px; bottom: 10%; left: 8%; border-radius: 16px; }
+    .fi-4 { width: 200px; height: 260px; bottom: 8%; right: 5%; border-radius: 16px; }
+
+    /* === SHOWCASE SECTION === */
+    .showcase { position: relative; padding: 8rem 2rem; overflow: hidden; }
+    .showcase-dark { background: var(--dark); }
+    .parallax-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1200px; margin: 0 auto; }
+    .parallax-card {
+        position: relative; overflow: hidden; aspect-ratio: 3/4; cursor: pointer;
+        border-radius: 16px; border: 1px solid var(--glass-border);
+    }
+    .parallax-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .parallax-card:hover img { transform: scale(1.1); }
+    .card-overlay {
+        position: absolute; inset: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 50%, transparent 100%);
+        display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem;
+    }
+    /* GLASS CARD OVERLAY */
+    .card-overlay .glass-tag {
+        display: inline-block; padding: 0.4rem 0.8rem; border-radius: 6px;
+        background: rgba(255,255,255,0.08); backdrop-filter: blur(8px);
+        border: 1px solid rgba(255,255,255,0.1);
+        font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+        color: var(--yellow); font-weight: 600; margin-bottom: 0.5rem; width: fit-content;
+    }
+    .card-overlay h3 { font-family: var(--font-display); font-size: 1.7rem; font-weight: 800; letter-spacing: 1px; color: var(--white); }
+    .card-overlay p { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-top: 0.3rem; }
+
+    /* === MENU SECTION === */
+    .menu-section { padding: 8rem 2rem; background: var(--cream); color: var(--black); position: relative; overflow: hidden; }
+    .menu-section .label { color: var(--red); }
+    .menu-section .section-header h2 { color: var(--black); }
+    .menu-section .section-header p { color: rgba(0,0,0,0.5); }
+    .menu-container { max-width: 1100px; margin: 0 auto; }
+    .menu-category { margin-bottom: 3.5rem; }
+    .menu-category-header {
+        display: flex; align-items: center; gap: 1rem;
+        margin-bottom: 1.5rem; padding-bottom: 0.8rem;
+        border-bottom: 2px solid var(--red);
+    }
+    .cat-emoji { font-size: 1.8rem; }
+    .menu-category-header h3 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; letter-spacing: 1px; color: var(--red); }
+    .menu-items { display: flex; flex-direction: column; gap: 0.6rem; }
+    .menu-item {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 1rem 1.2rem; background: white; border-radius: 10px;
+        border: 1px solid rgba(0,0,0,0.04);
+        transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s;
+    }
+    .menu-item:hover { transform: translateY(-2px) translateX(4px); box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
+    .menu-item-info { flex: 1; }
+    .menu-item-name { font-weight: 600; font-size: 0.95rem; color: var(--black); }
+    .menu-item-desc { font-size: 0.78rem; color: #999; margin-top: 0.15rem; }
+    .menu-item-price { font-family: var(--font-display); font-size: 1.3rem; font-weight: 800; color: var(--red); white-space: nowrap; margin-left: 1rem; }
+
+    /* === CTA SECTION === */
+    .cta-section {
+        position: relative; padding: 10rem 2rem; text-align: center; overflow: hidden;
+        background: linear-gradient(160deg, var(--red) 0%, #8B0000 50%, #4a0010 100%);
+    }
+    .cta-bg-text {
+        position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        font-family: var(--font-display); font-weight: 800;
+        font-size: clamp(6rem, 18vw, 18rem); color: rgba(255,255,255,0.03);
+        white-space: nowrap; letter-spacing: 8px; pointer-events: none;
+    }
+    .cta-section h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.5rem, 6vw, 5rem); letter-spacing: -1px; position: relative; z-index: 2; margin-bottom: 1rem; }
+    .cta-section p { font-size: 1.1rem; opacity: 0.7; margin-bottom: 2.5rem; position: relative; z-index: 2; font-weight: 300; }
+
+    /* === LOCATIONS === */
+    .locations-section { padding: 8rem 2rem; background: var(--dark); }
+    .locations-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; max-width: 900px; margin: 3rem auto 0; }
+    .location-card {
+        background: var(--glass-bg); border-radius: 16px; padding: 2.5rem;
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        transition: border-color 0.4s, box-shadow 0.4s;
+    }
+    .location-card:hover {
+        border-color: rgba(255,199,44,0.25);
+        box-shadow: 0 16px 48px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+    .loc-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+    .location-card h3 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; letter-spacing: 1px; color: var(--yellow); margin-bottom: 0.8rem; }
+    .location-card p { font-size: 0.88rem; color: rgba(255,255,255,0.5); line-height: 1.8; font-weight: 300; }
+    .loc-actions { display: flex; gap: 0.5rem; margin-top: 1.2rem; flex-wrap: wrap; }
+    .loc-btn {
+        display: inline-flex; align-items: center; gap: 0.35rem;
+        padding: 0.5rem 0.9rem; border-radius: 8px; font-size: 0.72rem;
+        font-weight: 700; text-decoration: none; text-transform: uppercase;
+        letter-spacing: 0.5px; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .loc-btn:hover { transform: translateY(-2px); }
+    .loc-btn-whatsapp { background: #25D366; color: white; }
+    .loc-btn-whatsapp:hover { box-shadow: 0 6px 20px rgba(37,211,102,0.35); }
+    .loc-btn-call { background: var(--red); color: white; }
+    .loc-btn-call:hover { box-shadow: 0 6px 20px var(--red-glow); }
+    .loc-btn-map { background: var(--yellow); color: var(--black); }
+    .loc-btn-map:hover { box-shadow: 0 6px 20px var(--yellow-glow); }
+
+    .maps-container { max-width: 900px; margin: 3rem auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .map-wrap { border-radius: 16px; overflow: hidden; border: 1px solid var(--glass-border); aspect-ratio: 4/3; }
+    .map-wrap iframe { width: 100%; height: 100%; border: 0; }
+
+    /* === INFO BAR === */
+    .info-bar { background: var(--grey); padding: 3rem 2rem; border-top: 1px solid var(--glass-border); }
+    .info-grid { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; max-width: 900px; margin: 0 auto; text-align: center; }
+    .info-item { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+    .info-icon { font-size: 1.4rem; }
+    .info-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2.5px; color: rgba(255,255,255,0.3); font-weight: 500; }
+    .info-value { font-weight: 700; font-size: 0.9rem; color: var(--yellow); }
+
+    /* === FOOTER === */
+    footer { padding: 4rem 2rem 2rem; background: var(--black); border-top: 1px solid var(--glass-border); text-align: center; }
+    .footer-logo { font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; letter-spacing: 3px; color: var(--white); margin-bottom: 1.5rem; }
+    .footer-logo .r { color: var(--red); }
+    .footer-logo .y { color: var(--yellow); }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .footer-links a { color: rgba(255,255,255,0.35); text-decoration: none; font-size: 0.82rem; transition: color 0.3s; font-weight: 400; }
+    .footer-links a:hover { color: var(--yellow); }
+    .seo-about { max-width: 700px; margin: 2rem auto; }
+    .seo-about p { font-size: 0.8rem; color: rgba(255,255,255,0.2); line-height: 1.8; font-weight: 300; }
+    .footer-copy { font-size: 0.7rem; color: rgba(255,255,255,0.15); margin-top: 1rem; }
+
+    /* === MOBILE MENU === */
+    .mobile-menu { display: none; position: fixed; inset: 0; background: rgba(6,6,6,0.97); z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; backdrop-filter: blur(20px); }
+    .mobile-menu.active { display: flex; }
+    .mobile-menu a { font-family: var(--font-display); font-size: 2.2rem; font-weight: 800; letter-spacing: 3px; color: var(--white); text-decoration: none; transition: color 0.3s; }
+    .mobile-menu a:hover { color: var(--yellow); }
+    .mobile-close { position: absolute; top: 2rem; right: 2rem; font-size: 2rem; color: white; cursor: pointer; background: none; border: none; }
+
+    /* === WHATSAPP FLOAT === */
+    .whatsapp-float {
+        position: fixed; bottom: 2rem; right: 2rem; z-index: 900;
+        width: 56px; height: 56px; background: #25D366; border-radius: 14px;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+        transition: transform 0.3s, box-shadow 0.3s; text-decoration: none;
+    }
+    .whatsapp-float:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 8px 32px rgba(37,211,102,0.5); }
+    .whatsapp-float svg { width: 28px; height: 28px; fill: white; }
+
+    /* === REVEAL CLASSES === */
+    .reveal { opacity: 0; transform: translateY(50px); }
+    .reveal-left { opacity: 0; transform: translateX(-60px); }
+    .reveal-right { opacity: 0; transform: translateX(60px); }
+    .reveal-scale { opacity: 0; transform: scale(0.9); }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 900px) {
+        .parallax-grid { grid-template-columns: 1fr 1fr; }
+        .locations-grid { grid-template-columns: 1fr; }
+        .maps-container { grid-template-columns: 1fr; }
+        .fi-1,.fi-2 { width: 160px; height: 160px; }
+        .fi-3,.fi-4 { width: 140px; height: 180px; }
+    }
+    @media (max-width: 768px) {
+        .nav-links { display: none; }
+        .nav-hamburger { display: flex; }
+        .parallax-grid { grid-template-columns: 1fr; max-width: 400px; }
+        .parallax-card { aspect-ratio: 4/3; }
+        .floating-img { opacity: 0.25; }
+        .hero-title { letter-spacing: 0; }
+        .blob-1 { width: 350px; height: 350px; }
+        .blob-2 { width: 300px; height: 300px; }
+        .blob-3 { width: 250px; height: 250px; }
+    }
+
+    /* === CUSTOM CURSOR TRAIL (desktop only) === */
+    .cursor-glow {
+        position: fixed; width: 300px; height: 300px; border-radius: 50%;
+        background: radial-gradient(circle, rgba(227,24,55,0.08) 0%, transparent 70%);
+        pointer-events: none; z-index: 9999; transform: translate(-50%,-50%);
+        transition: opacity 0.3s; opacity: 0;
+    }
+    @media (hover: hover) { .cursor-glow { opacity: 1; } }
+    </style>
 </head>
-<body style="">
+<body>
+    <!-- CURSOR GLOW -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- NAVBAR -->
     <nav class="navbar" id="navbar">
-        <a href="/#" class="nav-logo">CHICKEN <span>MASTER</span></a>
+        <a href="#" class="nav-logo">CHICKEN <span class="r">M</span><span class="y">ASTER</span></a>
         <ul class="nav-links">
-            <li><a href="/#about">Notre Histoire</a></li>
-            <li><a href="/#menu">Menu</a></li>
-            <li><a href="/#locations">Nos Adresses</a></li>
+            <li><a href="#about">Notre Histoire</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#locations">Nos Adresses</a></li>
             <li><a href="tel:+221784235959" class="nav-cta">Commander</a></li>
         </ul>
-        <button class="nav-hamburger" id="navHamburger">
+        <button class="nav-hamburger" id="navHamburger" onclick="toggleMobile()">
             <span></span><span></span><span></span>
         </button>
     </nav>
+
+    <!-- MOBILE MENU -->
     <div class="mobile-menu" id="mobileMenu">
-        <button class="mobile-close">×</button>
-        <a href="/#about">Notre Histoire</a>
-        <a href="/#menu">Menu</a>
-        <a href="/#locations">Nos Adresses</a>
+        <button class="mobile-close" onclick="toggleMobile()">&#10005;</button>
+        <a href="#about" onclick="toggleMobile()">Notre Histoire</a>
+        <a href="#menu" onclick="toggleMobile()">Menu</a>
+        <a href="#locations" onclick="toggleMobile()">Nos Adresses</a>
         <a href="tel:+221784235959">Commander</a>
     </div>
 
+    <!-- HERO -->
     <section class="hero">
+        <div class="hero-mesh">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+        </div>
         <div class="hero-grain"></div>
-        <div class="float-emoji fe-1" style="translate: none; rotate: none; scale: none; opacity: 0; transform: scale(0, 0);">🍔</div>
-        <div class="float-emoji fe-2" style="translate: none; rotate: none; scale: none; opacity: 0; transform: scale(0, 0);">🍗</div>
-        <div class="float-emoji fe-3" style="translate: none; rotate: none; scale: none; opacity: 0; transform: scale(0, 0);">🍟</div>
-        <div class="float-emoji fe-4" style="translate: none; rotate: none; scale: none; opacity: 0; transform: scale(0, 0);">🔥</div>
-        <div class="float-emoji fe-5" style="translate: none; rotate: none; scale: none; opacity: 0; transform: scale(0, 0);">🌶️</div>
-        <div class="float-emoji fe-6" style="translate: none; rotate: none; scale: none; opacity: 0; transform: scale(0, 0);">🥤</div>
+        <div class="hero-vignette"></div>
         <div class="hero-content">
-            <div class="hero-badge reveal-scale" style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;"><span style="font-size:1rem">⭐</span> Note 4.1/5 — Dakar, Sénégal</div>
-            <h1 class="hero-title" style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;">CHICKEN<br><span class="accent">MASTER</span></h1>
-            <p class="hero-subtitle" style="translate: none; rotate: none; scale: none; transform: translate3d(0px, 0.0002px, 0px); opacity: 1;">Le Meilleur Poulet Frit de Dakar</p>
-            <div class="hero-cta-group" style="translate: none; rotate: none; scale: none; transform: translate3d(0px, 0.88px, 0px); opacity: 0.956;">
-                <a href="/#menu" class="btn-primary">Voir le Menu</a>
-                <a href="https://wa.me/221784235959?text=Bonjour%2C%20je%20souhaite%20passer%20une%20commande%20%F0%9F%8D%97" class="btn-secondary" target="_blank">💬 WhatsApp</a>
+            <div class="hero-badge reveal-scale">&#9733; Note 4.1/5 &mdash; Dakar, S&eacute;n&eacute;gal</div>
+            <h1 class="hero-title">
+                <span class="line">CHICKEN</span>
+                <span class="line accent">MASTER</span>
+            </h1>
+            <p class="hero-subtitle">Le Meilleur Poulet Frit de Dakar</p>
+            <div class="hero-cta-group">
+                <a href="#menu" class="btn-primary">Voir le Menu</a>
+                <a href="https://wa.me/221784235959?text=Bonjour%2C%20je%20souhaite%20passer%20une%20commande%20%F0%9F%8D%97" class="btn-glass" target="_blank">&#x1F4AC; WhatsApp</a>
             </div>
         </div>
-        <div class="scroll-indicator" style="opacity: 0;"><span>Scroll</span><div class="scroll-line"></div></div>
+        <div class="scroll-indicator"><span>Scroll</span><div class="scroll-line"></div></div>
     </section>
 
+    <!-- ABOUT -->
     <section class="food-float-section" id="about">
-        <div class="floating-img fi-1 reveal-left" style="translate: none; rotate: none; scale: none; transform: translate(-80px, 0px); opacity: 0;"><img src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=600&amp;q=80" alt="Fried Chicken"></div>
-        <div class="floating-img fi-2 reveal-right" style="translate: none; rotate: none; scale: none; transform: translate(80px, 0px); opacity: 0;"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&amp;q=80" alt="Burger"></div>
-        <div class="floating-img fi-3 reveal-left" style="translate: none; rotate: none; scale: none; transform: translate(-80px, 0px); opacity: 0;"><img src="https://images.unsplash.com/photo-1630384060421-cb20aeb56983?w=600&amp;q=80" alt="Frites"></div>
-        <div class="floating-img fi-4 reveal-right" style="translate: none; rotate: none; scale: none; transform: translate(80px, 0px); opacity: 0;"><img src="https://images.unsplash.com/photo-1562967914-608f82629710?w=600&amp;q=80" alt="Wings"></div>
+        <div class="floating-img fi-1 reveal-left"><img src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=600&q=80" alt="Fried Chicken"></div>
+        <div class="floating-img fi-2 reveal-right"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80" alt="Burger"></div>
+        <div class="floating-img fi-3 reveal-left"><img src="https://images.unsplash.com/photo-1630384060421-cb20aeb56983?w=600&q=80" alt="Frites"></div>
+        <div class="floating-img fi-4 reveal-right"><img src="https://images.unsplash.com/photo-1562967914-608f82629710?w=600&q=80" alt="Wings"></div>
         <div class="food-float-text">
-            <h2 class="reveal" style="translate: none; rotate: none; scale: none; transform: translate(0px, 60px); opacity: 0;">FRIT SUR<br><span class="yellow">COMMANDE</span></h2>
-            <p class="reveal" style="translate: none; rotate: none; scale: none; transform: translate(0px, 60px); opacity: 0.6;">Chaque pièce est préparée à la commande, panée à la main et assaisonnée avec notre mélange d'épices secret. Croustillant à l'extérieur, tendre et juteux à l'intérieur.</p>
+            <h2 class="reveal">FRIT SUR<br><span class="yellow">COMMANDE</span></h2>
+            <p class="reveal">Chaque pi&egrave;ce est pr&eacute;par&eacute;e &agrave; la commande, pan&eacute;e &agrave; la main et assaisonn&eacute;e avec notre m&eacute;lange d'&eacute;pices secret. Croustillant &agrave; l'ext&eacute;rieur, tendre et juteux &agrave; l'int&eacute;rieur.</p>
         </div>
     </section>
 
+    <!-- SHOWCASE -->
     <section class="showcase showcase-dark">
-        <div class="showcase-header">
-            <span class="label reveal" style="translate: none; rotate: none; scale: none; transform: translate(0px, 60px); opacity: 0;">Notre Spécialité</span>
-            <h2 class="reveal" style="translate: none; rotate: none; scale: none; transform: translate(0px, 60px); opacity: 0;">POULET CROUSTILLANT</h2>
-            <p class="reveal" style="translate: none; rotate: none; scale: none; transform: translate(0px, 60px); opacity: 0.7;">Des recettes authentiques inspirées du meilleur de la street food, servies avec passion à Dakar.</p>
+        <div class="section-header">
+            <span class="label reveal">Notre Sp&eacute;cialit&eacute;</span>
+            <h2 class="reveal">POULET CROUSTILLANT</h2>
+            <p class="reveal">Des recettes authentiques inspir&eacute;es du meilleur de la street food, servies avec passion &agrave; Dakar.</p>
         </div>
         <div class="parallax-grid">
-            <div class="parallax-card reveal-scale" style="translate: none; rotate: none; scale: none; transform: scale(0.85, 0.85); opacity: 0;"><img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=600&amp;q=80" alt="Bucket"><div class="card-overlay"><h3>MIX BUCKET</h3><p>L'incontournable à partager</p></div></div>
-            <div class="parallax-card reveal-scale" style="translate: none; rotate: none; scale: none; transform: scale(0.85, 0.85); opacity: 0;"><img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&amp;q=80" alt="Burger"><div class="card-overlay"><h3>BURGERS</h3><p>Poulet grillé ou double</p></div></div>
-            <div class="parallax-card reveal-scale" style="translate: none; rotate: none; scale: none; transform: scale(0.85, 0.85); opacity: 0;"><img src="https://images.unsplash.com/photo-1529042410759-befb1204b468?w=600&amp;q=80" alt="Frites"><div class="card-overlay"><h3>FRITES &amp; SNACKS</h3><p>Dorées à la perfection</p></div></div>
+            <div class="parallax-card reveal-scale"><img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=600&q=80" alt="Bucket"><div class="card-overlay"><div class="glass-tag">Best-seller</div><h3>MIX BUCKET</h3><p>L'incontournable &agrave; partager</p></div></div>
+            <div class="parallax-card reveal-scale"><img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&q=80" alt="Burger"><div class="card-overlay"><div class="glass-tag">Classique</div><h3>BURGERS</h3><p>Poulet grill&eacute; ou double</p></div></div>
+            <div class="parallax-card reveal-scale"><img src="https://images.unsplash.com/photo-1529042410759-befb1204b468?w=600&q=80" alt="Frites"><div class="card-overlay"><div class="glass-tag">Snacks</div><h3>FRITES &amp; SNACKS</h3><p>Dor&eacute;es &agrave; la perfection</p></div></div>
         </div>
     </section>
 
+    <!-- MENU -->
     <section class="menu-section" id="menu">
         <div class="menu-container">
-            <div class="showcase-header">
-                <span class="label reveal" style="translate: none; rotate: none; scale: none; transform: translate(0px, 60px); opacity: 0;">La Carte</span>
-                <h2 class="reveal" style="color: var(--black); translate: none; rotate: none; scale: none; transform: translate(0px, 60px); opacity: 0;">NOTRE MENU</h2>
-                <p class="reveal" style="translate: none; rotate: none; scale: none; transform: translate(0px, 60px); opacity: 0.7;">Tous nos plats sont préparés frais, sur commande, avec des ingrédients de qualité.</p>
+            <div class="section-header">
+                <span class="label reveal">La Carte</span>
+                <h2 class="reveal">NOTRE MENU</h2>
+                <p class="reveal">Tous nos plats sont pr&eacute;par&eacute;s frais, sur commande, avec des ingr&eacute;dients de qualit&eacute;.</p>
             </div>
-            <div class="menu-category reveal" style="translate: none; rotate: none; scale: none; transform: translate(0px, 60px); opacity: 0;"><div class="menu-category-header"><span class="cat-emoji">⭐</span><h3>NOS MENUS</h3></div><div class="menu-items">
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Menu 1</div><div class="menu-item-desc">Big Burger + 2 Ailes + Frites + Boisson</div></div><div class="menu-item-price">3 800 Fr</div></div>
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Menu 2</div><div class="menu-item-desc">Big Burger + Frites + Boisson</div></div><div class="menu-item-price">2 800 Fr</div></div>
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Menu 3</div><div class="menu-item-desc">Burger Poulet grillé + Frites + 2 Ailes + Boisson</div></div><div class="menu-item-price">3 800 Fr</div></div>
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Menu 4</div><div class="menu-item-desc">Wrap + 6 Nuggets + Frites + Boisson</div></div><div class="menu-item-price">4 300 Fr</div></div>
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Menu 5</div><div class="menu-item-desc">Burger Poulet double + Frites + 2 Ailes + Boisson</div></div><div class="menu-item-price">4 300 Fr</div></div>
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Menu 6</div><div class="menu-item-desc">8 Nuggets + Frites + Boisson</div></div><div class="menu-item-price">2 800 Fr</div></div>
+            <div class="menu-category reveal"><div class="menu-category-header"><span class="cat-emoji">&#11088;</span><h3>NOS MENUS</h3></div><div class="menu-items">
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Menu 1</div><div class="menu-item-desc">Big Burger + 2 Ailes + Frites + Boisson</div></div><div class="menu-item-price">3 800 Fr</div></div>
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Menu 2</div><div class="menu-item-desc">Big Burger + Frites + Boisson</div></div><div class="menu-item-price">2 800 Fr</div></div>
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Menu 3</div><div class="menu-item-desc">Burger Poulet grill&eacute; + Frites + 2 Ailes + Boisson</div></div><div class="menu-item-price">3 800 Fr</div></div>
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Menu 4</div><div class="menu-item-desc">Wrap + 6 Nuggets + Frites + Boisson</div></div><div class="menu-item-price">4 300 Fr</div></div>
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Menu 5</div><div class="menu-item-desc">Burger Poulet double + Frites + 2 Ailes + Boisson</div></div><div class="menu-item-price">4 300 Fr</div></div>
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Menu 6</div><div class="menu-item-desc">8 Nuggets + Frites + Boisson</div></div><div class="menu-item-price">2 800 Fr</div></div>
             </div></div>
-            <div class="menu-category reveal" style="translate: none; rotate: none; scale: none; transform: translate(0px, 60px); opacity: 0;"><div class="menu-category-header"><span class="cat-emoji">🌯</span><h3>SANDWICHS</h3></div><div class="menu-items">
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Hot Dog</div></div><div class="menu-item-price">1 200 Fr</div></div>
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Chawarma Poulet</div><div class="menu-item-desc">Filet de Poulet + Frites + Salade + Mayonnaise</div></div><div class="menu-item-price">2 000 Fr</div></div>
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Tacos</div></div><div class="menu-item-price">3 000 Fr</div></div>
+            <div class="menu-category reveal"><div class="menu-category-header"><span class="cat-emoji">&#127791;</span><h3>SANDWICHS</h3></div><div class="menu-items">
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Hot Dog</div></div><div class="menu-item-price">1 200 Fr</div></div>
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Chawarma Poulet</div><div class="menu-item-desc">Filet de Poulet + Frites + Salade + Mayonnaise</div></div><div class="menu-item-price">2 000 Fr</div></div>
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Tacos</div></div><div class="menu-item-price">3 000 Fr</div></div>
             </div></div>
-            <div class="menu-category reveal" style="translate: none; rotate: none; scale: none; transform: translate(0px, 60px); opacity: 0;"><div class="menu-category-header"><span class="cat-emoji">🍔</span><h3>BURGERS</h3></div><div class="menu-items">
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Burger Poulet Double</div></div><div class="menu-item-price">3 000 Fr</div></div>
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Burger Poulet Grillé</div><div class="menu-item-desc">Blanc de Poulet grillé + Fromage + Salade + Tomate + Mayonnaise</div></div><div class="menu-item-price">2 500 Fr</div></div>
+            <div class="menu-category reveal"><div class="menu-category-header"><span class="cat-emoji">&#127828;</span><h3>BURGERS</h3></div><div class="menu-items">
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Burger Poulet Double</div></div><div class="menu-item-price">3 000 Fr</div></div>
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Burger Poulet Grill&eacute;</div><div class="menu-item-desc">Blanc de Poulet grill&eacute; + Fromage + Salade + Tomate + Mayonnaise</div></div><div class="menu-item-price">2 500 Fr</div></div>
             </div></div>
-            <div class="menu-category reveal" style="translate: none; rotate: none; scale: none; transform: translate(0px, 60px); opacity: 0;"><div class="menu-category-header"><span class="cat-emoji">🍗</span><h3>FRIED CHICKEN</h3></div><div class="menu-items">
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Nuggets De Poulet</div></div><div class="menu-item-price">2 000 Fr</div></div>
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Blanc De Poulet Frites</div></div><div class="menu-item-price">2 000 Fr</div></div>
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Cuisse De Poulet</div><div class="menu-item-desc">Pané et épicé</div></div><div class="menu-item-price">1 200 Fr</div></div>
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Ailes De Poulet Grillés</div></div><div class="menu-item-price">3 500 Fr</div></div>
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Pop Corn De Poulet</div></div><div class="menu-item-price">1 300 Fr</div></div>
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Aile De Poulet</div><div class="menu-item-desc">Pané et épicé</div></div><div class="menu-item-price">1 000 Fr</div></div>
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Mix Bucket</div></div><div class="menu-item-price">6 000 Fr</div></div>
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Crispy Chicken</div></div><div class="menu-item-price">6 000 Fr</div></div>
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Ailes De Poulet 6Pcs</div><div class="menu-item-desc">Pané et épicé</div></div><div class="menu-item-price">3 500 Fr</div></div>
+            <div class="menu-category reveal"><div class="menu-category-header"><span class="cat-emoji">&#127831;</span><h3>FRIED CHICKEN</h3></div><div class="menu-items">
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Nuggets De Poulet</div></div><div class="menu-item-price">2 000 Fr</div></div>
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Blanc De Poulet Frites</div></div><div class="menu-item-price">2 000 Fr</div></div>
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Cuisse De Poulet</div><div class="menu-item-desc">Pan&eacute; et &eacute;pic&eacute;</div></div><div class="menu-item-price">1 200 Fr</div></div>
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Ailes De Poulet Grill&eacute;s</div></div><div class="menu-item-price">3 500 Fr</div></div>
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Pop Corn De Poulet</div></div><div class="menu-item-price">1 300 Fr</div></div>
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Aile De Poulet</div><div class="menu-item-desc">Pan&eacute; et &eacute;pic&eacute;</div></div><div class="menu-item-price">1 000 Fr</div></div>
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Mix Bucket</div></div><div class="menu-item-price">6 000 Fr</div></div>
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Crispy Chicken</div></div><div class="menu-item-price">6 000 Fr</div></div>
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Ailes De Poulet 6Pcs</div><div class="menu-item-desc">Pan&eacute; et &eacute;pic&eacute;</div></div><div class="menu-item-price">3 500 Fr</div></div>
             </div></div>
-            <div class="menu-category reveal" style="translate: none; rotate: none; scale: none; transform: translate(0px, 60px); opacity: 0;"><div class="menu-category-header"><span class="cat-emoji">🍟</span><h3>SNACKS</h3></div><div class="menu-items">
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Saucisses De Poulet</div></div><div class="menu-item-price">1 500 Fr</div></div>
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Frites</div></div><div class="menu-item-price">500 Fr</div></div>
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Crevettes Frites</div></div><div class="menu-item-price">1 000 Fr</div></div>
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Nems</div></div><div class="menu-item-price">1 500 Fr</div></div>
+            <div class="menu-category reveal"><div class="menu-category-header"><span class="cat-emoji">&#127839;</span><h3>SNACKS</h3></div><div class="menu-items">
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Saucisses De Poulet</div></div><div class="menu-item-price">1 500 Fr</div></div>
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Frites</div></div><div class="menu-item-price">500 Fr</div></div>
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Crevettes Frites</div></div><div class="menu-item-price">1 000 Fr</div></div>
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Nems</div></div><div class="menu-item-price">1 500 Fr</div></div>
             </div></div>
-            <div class="menu-category reveal" style="translate: none; rotate: none; scale: none; transform: translate(0px, 60px); opacity: 0;"><div class="menu-category-header"><span class="cat-emoji">🥤</span><h3>BOISSONS</h3></div><div class="menu-items">
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Jus De Bouye</div></div><div class="menu-item-price">800 Fr</div></div>
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Jus De Fruits</div></div><div class="menu-item-price">800 Fr</div></div>
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Jus De Bissap</div></div><div class="menu-item-price">800 Fr</div></div>
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Soda</div><div class="menu-item-desc">Coca, Fanta ou Sprite</div></div><div class="menu-item-price">700 Fr</div></div>
-                <div class="menu-item" style="translate: none; rotate: none; scale: none; transform: translate(-30px, 0px); opacity: 0;"><div class="menu-item-info"><div class="menu-item-name">Jus De Ginger</div></div><div class="menu-item-price">800 Fr</div></div>
+            <div class="menu-category reveal"><div class="menu-category-header"><span class="cat-emoji">&#129380;</span><h3>BOISSONS</h3></div><div class="menu-items">
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Jus De Bouye</div></div><div class="menu-item-price">800 Fr</div></div>
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Jus De Fruits</div></div><div class="menu-item-price">800 Fr</div></div>
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Jus De Bissap</div></div><div class="menu-item-price">800 Fr</div></div>
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Soda</div><div class="menu-item-desc">Coca, Fanta ou Sprite</div></div><div class="menu-item-price">700 Fr</div></div>
+                <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Jus De Ginger</div></div><div class="menu-item-price">800 Fr</div></div>
             </div></div>
         </div>
     </section>
 
+    <!-- CTA -->
     <section class="cta-section">
         <div class="cta-bg-text">CHICKEN MASTER</div>
-        <h2 class="reveal" style="translate: none; rotate: none; scale: none; transform: translate(0px, 60px); opacity: 0;">UNE ENVIE DE POULET ?</h2>
-        <p class="reveal" style="translate: none; rotate: none; scale: none; transform: translate(0px, 60px); opacity: 0.8;">Commandez par WhatsApp ou appelez-nous directement</p>
+        <h2 class="reveal">UNE ENVIE DE POULET ?</h2>
+        <p class="reveal">Commandez par WhatsApp ou appelez-nous directement</p>
         <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:2">
-            <a href="https://wa.me/221784235959?text=Bonjour%2C%20je%20souhaite%20passer%20une%20commande%20%F0%9F%8D%97" class="btn-yellow reveal-scale" target="_blank" style="translate: none; rotate: none; scale: none; transform: scale(0.85, 0.85); opacity: 0;">💬 Commander sur WhatsApp</a>
-            <a href="tel:+221784235959" class="btn-yellow reveal-scale" style="background: white; color: var(--black); translate: none; rotate: none; scale: none; transform: scale(0.85, 0.85); opacity: 0;">📞 Appeler</a>
+            <a href="https://wa.me/221784235959?text=Bonjour%2C%20je%20souhaite%20passer%20une%20commande%20%F0%9F%8D%97" class="btn-yellow reveal-scale" target="_blank">&#x1F4AC; Commander sur WhatsApp</a>
+            <a href="tel:+221784235959" class="btn-yellow reveal-scale" style="background:white;color:var(--black);">&#x1F4DE; Appeler</a>
         </div>
     </section>
 
+    <!-- LOCATIONS -->
     <section class="locations-section" id="locations">
-        <div class="showcase-header">
-            <span class="label reveal" style="translate: none; rotate: none; scale: none; transform: translate(0px, 60px); opacity: 0;">Retrouvez-nous</span>
-            <h2 class="reveal" style="translate: none; rotate: none; scale: none; transform: translate(0px, 60px); opacity: 0;">NOS ADRESSES</h2>
-            <p class="reveal" style="translate: none; rotate: none; scale: none; transform: translate(0px, 60px); opacity: 0.7;">Deux adresses à Dakar pour vous servir, de 9h à minuit.</p>
+        <div class="section-header">
+            <span class="label reveal">Retrouvez-nous</span>
+            <h2 class="reveal">NOS ADRESSES</h2>
+            <p class="reveal">Deux adresses &agrave; Dakar pour vous servir, de 9h &agrave; minuit.</p>
         </div>
         <div class="locations-grid">
-            <div class="location-card reveal-left" style="translate: none; rotate: none; scale: none; transform: translate(-80px, 0px); opacity: 0;">
-                <div class="loc-icon">📍</div>
+            <div class="location-card reveal-left">
+                <div class="loc-icon">&#x1F4CD;</div>
                 <h3>CHEIKH ANTA DIOP</h3>
-                <p>Avenue Cheikh Anta Diop, Fass<br>Dakar, Sénégal<br>🕐 Ouvert de 9h à 00h</p>
+                <p>Avenue Cheikh Anta Diop, Fass<br>Dakar, S&eacute;n&eacute;gal<br>&#x1F550; Ouvert de 9h &agrave; 00h</p>
                 <div class="loc-actions">
-                    <a href="https://wa.me/221784235959?text=Bonjour%2C%20commande%20pour%20Cheikh%20Anta%20Diop%20%F0%9F%8D%97" class="loc-btn loc-btn-whatsapp" target="_blank">💬 WhatsApp</a>
-                    <a href="tel:+221784235959" class="loc-btn loc-btn-call">📞 Appeler</a>
-                    <a href="https://www.google.com/maps/search/Chicken+Master+Avenue+Cheikh+Anta+Diop+Dakar" class="loc-btn loc-btn-map" target="_blank">🗺️ Itinéraire</a>
+                    <a href="https://wa.me/221784235959?text=Bonjour%2C%20commande%20pour%20Cheikh%20Anta%20Diop%20%F0%9F%8D%97" class="loc-btn loc-btn-whatsapp" target="_blank">&#x1F4AC; WhatsApp</a>
+                    <a href="tel:+221784235959" class="loc-btn loc-btn-call">&#x1F4DE; Appeler</a>
+                    <a href="https://www.google.com/maps/search/Chicken+Master+Avenue+Cheikh+Anta+Diop+Dakar" class="loc-btn loc-btn-map" target="_blank">&#x1F5FA;&#xFE0F; Itin&eacute;raire</a>
                 </div>
             </div>
-            <div class="location-card reveal-right" style="translate: none; rotate: none; scale: none; transform: translate(80px, 0px); opacity: 0;">
-                <div class="loc-icon">📍</div>
+            <div class="location-card reveal-right">
+                <div class="loc-icon">&#x1F4CD;</div>
                 <h3>YOFF</h3>
-                <p>Avenue Seydina Limamoulaye<br>Dakar, Sénégal<br>🕐 Ouvert de 9h à 00h</p>
+                <p>Avenue Seydina Limamoulaye<br>Dakar, S&eacute;n&eacute;gal<br>&#x1F550; Ouvert de 9h &agrave; 00h</p>
                 <div class="loc-actions">
-                    <a href="https://wa.me/221773578544?text=Bonjour%2C%20commande%20pour%20Yoff%20%F0%9F%8D%97" class="loc-btn loc-btn-whatsapp" target="_blank">💬 WhatsApp</a>
-                    <a href="tel:+221773578544" class="loc-btn loc-btn-call">📞 Appeler</a>
-                    <a href="https://www.google.com/maps/search/Chicken+Master+Yoff+Dakar" class="loc-btn loc-btn-map" target="_blank">🗺️ Itinéraire</a>
+                    <a href="https://wa.me/221773578544?text=Bonjour%2C%20commande%20pour%20Yoff%20%F0%9F%8D%97" class="loc-btn loc-btn-whatsapp" target="_blank">&#x1F4AC; WhatsApp</a>
+                    <a href="tel:+221773578544" class="loc-btn loc-btn-call">&#x1F4DE; Appeler</a>
+                    <a href="https://www.google.com/maps/search/Chicken+Master+Yoff+Dakar" class="loc-btn loc-btn-map" target="_blank">&#x1F5FA;&#xFE0F; Itin&eacute;raire</a>
                 </div>
             </div>
         </div>
         <div class="maps-container">
-            <div class="map-wrap reveal-left" style="translate: none; rotate: none; scale: none; transform: translate(-80px, 0px); opacity: 0;">
-                <div src="cid:frame-DE177A2515DE8FD496908B5FE0C73796@mhtml.blink" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Chicken Master Cheikh Anta Diop" data-original-tag="iframe"><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body></body></html></div>
+            <div class="map-wrap reveal-left">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3858.8!2d-17.4677!3d14.6937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDQxJzM3LjQiTiAxN8KwMjgnMDMuNyJX!5e0!3m2!1sfr!2ssn!4v1" loading="lazy" title="Chicken Master Cheikh Anta Diop"></iframe>
             </div>
-            <div class="map-wrap reveal-right" style="translate: none; rotate: none; scale: none; transform: translate(80px, 0px); opacity: 0;">
-                <div src="cid:frame-C31EB60976A89A49BB17445965058DF0@mhtml.blink" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Chicken Master Yoff" data-original-tag="iframe"><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body></body></html></div>
+            <div class="map-wrap reveal-right">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3858.4!2d-17.4833!3d14.7597!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDQ1JzM0LjkiTiAxN8KwMjgnNTkuOSJX!5e0!3m2!1sfr!2ssn!4v1" loading="lazy" title="Chicken Master Yoff"></iframe>
             </div>
         </div>
     </section>
@@ -463,71 +554,114 @@ footer { padding: 4rem 2rem 2rem; background: var(--black); border-top: 1px soli
     <!-- INFO BAR -->
     <div class="info-bar">
         <div class="info-grid">
-            <div class="info-item"><div class="info-icon">🕐</div><div class="info-label">Horaires</div><div class="info-value">9h – 00h</div></div>
-            <div class="info-item"><div class="info-icon">💳</div><div class="info-label">Paiement</div><div class="info-value">Wave · OM · Cash</div></div>
-            <div class="info-item"><div class="info-icon">🛵</div><div class="info-label">Livraison</div><div class="info-value">Yassir · Sur place</div></div>
-            <div class="info-item"><div class="info-icon">⭐</div><div class="info-label">Note</div><div class="info-value">4.1/5</div></div>
-            <div class="info-item"><div class="info-icon">📍</div><div class="info-label">Adresses</div><div class="info-value">2 restaurants à Dakar</div></div>
+            <div class="info-item"><div class="info-icon">&#x1F550;</div><div class="info-label">Horaires</div><div class="info-value">9h &ndash; 00h</div></div>
+            <div class="info-item"><div class="info-icon">&#x1F4B3;</div><div class="info-label">Paiement</div><div class="info-value">Wave &middot; OM &middot; Cash</div></div>
+            <div class="info-item"><div class="info-icon">&#x1F6F5;</div><div class="info-label">Livraison</div><div class="info-value">Yassir &middot; Sur place</div></div>
+            <div class="info-item"><div class="info-icon">&#11088;</div><div class="info-label">Note</div><div class="info-value">4.1/5</div></div>
+            <div class="info-item"><div class="info-icon">&#x1F4CD;</div><div class="info-label">Adresses</div><div class="info-value">2 restaurants &agrave; Dakar</div></div>
         </div>
     </div>
 
+    <!-- FOOTER -->
     <footer>
-        <div class="footer-logo">CHICKEN <span>MASTER</span></div>
+        <div class="footer-logo">CHICKEN <span class="r">M</span><span class="y">ASTER</span></div>
         <div class="footer-links">
-            <a href="/#about">Notre Histoire</a>
-            <a href="/#menu">Menu</a>
-            <a href="/#locations">Nos Adresses</a>
+            <a href="#about">Notre Histoire</a>
+            <a href="#menu">Menu</a>
+            <a href="#locations">Nos Adresses</a>
             <a href="https://www.instagram.com/maochengxuxu/" target="_blank">Instagram</a>
             <a href="https://www.facebook.com/p/Chicken-Master-100066919341883/" target="_blank">Facebook</a>
         </div>
         <div class="seo-about">
-            <p>Chicken Master — Restaurant de poulet frit à Dakar, Sénégal. Spécialiste du poulet pané et épicé, burgers, nuggets, wraps et frites croustillantes. Deux adresses : Avenue Cheikh Anta Diop (Fass) et Avenue Seydina Limamoulaye (Yoff). Ouvert tous les jours de 9h à minuit. Commandez par téléphone ou WhatsApp. Livraison disponible via Yassir Food.</p>
+            <p>Chicken Master &mdash; Restaurant de poulet frit &agrave; Dakar, S&eacute;n&eacute;gal. Sp&eacute;cialiste du poulet pan&eacute; et &eacute;pic&eacute;, burgers, nuggets, wraps et frites croustillantes. Deux adresses : Avenue Cheikh Anta Diop (Fass) et Avenue Seydina Limamoulaye (Yoff). Ouvert tous les jours de 9h &agrave; minuit. Commandez par t&eacute;l&eacute;phone ou WhatsApp. Livraison disponible via Yassir Food.</p>
         </div>
-        <p class="footer-copy">© 2026 Chicken Master Dakar. Tous droits réservés.</p>
+        <p class="footer-copy">&copy; 2026 Chicken Master Dakar. Tous droits r&eacute;serv&eacute;s.</p>
     </footer>
 
-    <!-- WHATSAPP FLOATING BUTTON -->
+    <!-- WHATSAPP FLOAT -->
     <a href="https://wa.me/221784235959?text=Bonjour%2C%20je%20souhaite%20passer%20une%20commande%20%F0%9F%8D%97" class="whatsapp-float" target="_blank" aria-label="Commander sur WhatsApp">
-        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     </a>
 
+    <!-- SCRIPTS -->
     <script>
-        gsap.registerPlugin(ScrollTrigger);
-        window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50); });
-        function toggleMobile() { document.getElementById('mobileMenu').classList.toggle('active'); }
+    gsap.registerPlugin(ScrollTrigger);
 
-        // Hero emoji parallax
-        document.querySelectorAll('.float-emoji').forEach((el, i) => {
-            gsap.to(el, { y: -(80 + i * 40), rotation: i % 2 === 0 ? 360 : -360, opacity: 0.4, scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.5 } });
+    // Navbar scroll
+    window.addEventListener('scroll', () => {
+        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Mobile menu
+    function toggleMobile() { document.getElementById('mobileMenu').classList.toggle('active'); }
+
+    // Cursor glow (desktop)
+    const glow = document.getElementById('cursorGlow');
+    if (window.matchMedia('(hover: hover)').matches) {
+        document.addEventListener('mousemove', e => {
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
         });
-        // Floating food images parallax
-        document.querySelectorAll('.floating-img').forEach((el, i) => {
-            gsap.to(el, { y: i % 2 === 0 ? -120 : 120, rotation: i % 2 === 0 ? -8 : 8, scale: 1.05, scrollTrigger: { trigger: '.food-float-section', start: 'top bottom', end: 'bottom top', scrub: 2 } });
+    }
+
+    // Hero entrance - cinematic stagger
+    const heroTl = gsap.timeline({ delay: 0.2 });
+    heroTl
+        .from('.hero-badge', { opacity: 0, y: 20, duration: 0.6, ease: 'power3.out' })
+        .from('.hero-title .line', { opacity: 0, y: 80, stagger: 0.15, duration: 0.9, ease: 'power4.out' }, '-=0.3')
+        .from('.hero-subtitle', { opacity: 0, y: 20, duration: 0.7, ease: 'power3.out' }, '-=0.4')
+        .from('.hero-cta-group', { opacity: 0, y: 20, duration: 0.5, ease: 'power3.out' }, '-=0.3')
+        .from('.scroll-indicator', { opacity: 0, duration: 1 }, '-=0.2');
+
+    // Blob parallax on scroll
+    gsap.to('.blob-1', { y: -200, scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 2 }});
+    gsap.to('.blob-2', { y: -150, x: -80, scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 2 }});
+    gsap.to('.blob-3', { y: -100, scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 2 }});
+
+    // Floating food images parallax
+    document.querySelectorAll('.floating-img').forEach((el, i) => {
+        gsap.to(el, {
+            y: i % 2 === 0 ? -100 : 100, rotation: i % 2 === 0 ? -6 : 6, scale: 1.03,
+            scrollTrigger: { trigger: '.food-float-section', start: 'top bottom', end: 'bottom top', scrub: 2 }
         });
-        // Parallax cards depth
-        document.querySelectorAll('.parallax-card').forEach((card, i) => {
-            gsap.to(card, { y: -30 * (i + 1), scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: 1 } });
+    });
+
+    // Parallax cards depth
+    document.querySelectorAll('.parallax-card').forEach((card, i) => {
+        gsap.to(card, { y: -25 * (i + 1), scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: 1 }});
+    });
+
+    // Reveals with stagger
+    gsap.utils.toArray('.reveal').forEach(el => {
+        gsap.to(el, { opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
         });
-        // Reveals
-        gsap.utils.toArray('.reveal').forEach(el => { gsap.to(el, { opacity: 1, y: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' } }); });
-        gsap.utils.toArray('.reveal-left').forEach(el => { gsap.to(el, { opacity: 1, x: 0, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' } }); });
-        gsap.utils.toArray('.reveal-right').forEach(el => { gsap.to(el, { opacity: 1, x: 0, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' } }); });
-        gsap.utils.toArray('.reveal-scale').forEach(el => { gsap.to(el, { opacity: 1, scale: 1, duration: 1, ease: 'back.out(1.4)', scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' } }); });
-        // Menu items stagger
-        document.querySelectorAll('.menu-category').forEach(cat => {
-            cat.querySelectorAll('.menu-item').forEach((item, i) => {
-                gsap.from(item, { opacity: 0, x: -30, duration: 0.5, delay: i * 0.06, ease: 'power2.out', scrollTrigger: { trigger: cat, start: 'top 80%', toggleActions: 'play none none none' } });
+    });
+    gsap.utils.toArray('.reveal-left').forEach(el => {
+        gsap.to(el, { opacity: 1, x: 0, duration: 1.2, ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+        });
+    });
+    gsap.utils.toArray('.reveal-right').forEach(el => {
+        gsap.to(el, { opacity: 1, x: 0, duration: 1.2, ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+        });
+    });
+    gsap.utils.toArray('.reveal-scale').forEach(el => {
+        gsap.to(el, { opacity: 1, scale: 1, duration: 1, ease: 'back.out(1.2)',
+            scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+        });
+    });
+
+    // Menu items stagger
+    document.querySelectorAll('.menu-category').forEach(cat => {
+        cat.querySelectorAll('.menu-item').forEach((item, i) => {
+            gsap.from(item, {
+                opacity: 0, x: -20, duration: 0.4, delay: i * 0.05, ease: 'power2.out',
+                scrollTrigger: { trigger: cat, start: 'top 82%', toggleActions: 'play none none none' }
             });
         });
-        // Hero entrance
-        const heroTl = gsap.timeline({ delay: 0.3 });
-        heroTl.from('.hero-badge', { opacity: 0, scale: 0.8, duration: 0.6, ease: 'back.out(1.7)' })
-            .from('.hero-title', { opacity: 0, y: 60, duration: 0.8, ease: 'power3.out' }, '-=0.3')
-            .from('.hero-subtitle', { opacity: 0, y: 30, duration: 0.6, ease: 'power3.out' }, '-=0.4')
-            .from('.hero-cta-group', { opacity: 0, y: 20, duration: 0.5, ease: 'power3.out' }, '-=0.3')
-            .from('.scroll-indicator', { opacity: 0, duration: 0.8 }, '-=0.2')
-            .from('.float-emoji', { opacity: 0, scale: 0, stagger: 0.1, duration: 0.4, ease: 'back.out(2)' }, '-=0.6');
+    });
     </script>
-
-
-</body></html>
+</body>
+</html>
