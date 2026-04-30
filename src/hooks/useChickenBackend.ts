@@ -21,10 +21,14 @@ export function useChickenBackend() {
   const remove = (id: string) =>
     setCart((current) => ({ ...current, [id]: Math.max((current[id] ?? 0) - 1, 0) }));
 
-  const signIn = (name: string, phone: string) => setUser(db.signIn(name, phone));
+  const signIn = (name: string, phone: string) => {
+    const nextUser = db.signIn(name, phone);
+    setUser(nextUser);
+    return nextUser;
+  };
 
-  const checkout = (address: string) => {
-    const activeUser = user ?? db.signIn("Invité Chicken Master", "+221 77 000 00 00");
+  const checkout = (address: string, fallbackUser?: Pick<User, "name" | "phone">) => {
+    const activeUser = user ?? db.signIn(fallbackUser?.name || "Invité Chicken Master", fallbackUser?.phone || "+221 77 000 00 00");
     setUser(activeUser);
     const order = db.saveOrder({
       user: activeUser,

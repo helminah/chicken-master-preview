@@ -30,6 +30,9 @@ const story = [
     title: "Frit sur commande",
     body: "Chaque pièce est préparée à la commande, panée à la main et servie chaude.",
     image: assets.roast,
+    position: "right center",
+    panTarget: "62% center",
+    shade: "linear-gradient(90deg,#090705 0%,rgba(9,7,5,0.92) 34%,rgba(9,7,5,0.18) 100%)",
     icon: Flame,
   },
   {
@@ -37,6 +40,9 @@ const story = [
     title: "Poulet croustillant",
     body: "Ailes dorées, crispy généreux, buckets à partager, burgers, chawarma et frites.",
     image: assets.fryer,
+    position: "right center",
+    panTarget: "64% center",
+    shade: "linear-gradient(90deg,#090705 0%,rgba(9,7,5,0.9) 33%,rgba(9,7,5,0.16) 100%)",
     icon: Sparkles,
   },
   {
@@ -44,6 +50,9 @@ const story = [
     title: "Menus Dakar",
     body: "Menus complets de 2 800 Fr à 4 300 Fr, avec burger, ailes, frites et boisson.",
     image: assets.box,
+    position: "right center",
+    panTarget: "60% center",
+    shade: "linear-gradient(90deg,#090705 0%,rgba(9,7,5,0.88) 32%,rgba(9,7,5,0.14) 100%)",
     icon: ShoppingBag,
   },
   {
@@ -51,6 +60,9 @@ const story = [
     title: "Fass et Yoff",
     body: "Deux adresses à Dakar, ouvertes de 9h à minuit, avec commande par WhatsApp.",
     image: assets.renaissance,
+    position: "72% center",
+    panTarget: "78% center",
+    shade: "linear-gradient(90deg,#090705 0%,rgba(9,7,5,0.82) 30%,rgba(9,7,5,0.05) 74%,rgba(9,7,5,0.22) 100%)",
     icon: MapPin,
   },
 ];
@@ -72,6 +84,7 @@ const locations = [
     address: "Avenue Cheikh Anta Diop, Fass, Dakar",
     phone: "+221 78 423 59 59",
     href: "tel:+221784235959",
+    waNumber: "221784235959",
     whatsapp: "https://wa.me/221784235959?text=Bonjour%2C%20je%20souhaite%20passer%20une%20commande%20chez%20Chicken%20Master%20Fass",
   },
   {
@@ -79,6 +92,7 @@ const locations = [
     address: "Avenue Seydina Limamoulaye, Dakar",
     phone: "+221 77 357 85 44",
     href: "tel:+221773578544",
+    waNumber: "221773578544",
     whatsapp: "https://wa.me/221773578544?text=Bonjour%2C%20je%20souhaite%20passer%20une%20commande%20chez%20Chicken%20Master%20Yoff",
   },
 ];
@@ -87,12 +101,17 @@ function formatPrice(price: number) {
   return new Intl.NumberFormat("fr-SN").format(price) + " FCFA";
 }
 
+function whatsappUrl(phoneNumber: string, message: string) {
+  return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+}
+
 function App() {
   const backend = useChickenBackend();
   const root = useRef<HTMLDivElement>(null);
   const [name, setName] = useState("Ami du Master");
   const [phone, setPhone] = useState("+221 ");
   const [address, setAddress] = useState("Plateau, Dakar");
+  const [selectedLocation, setSelectedLocation] = useState(locations[0].name);
   const [lastOrder, setLastOrder] = useState<string | null>(null);
 
   useEffect(() => {
@@ -121,7 +140,7 @@ function App() {
       });
       gsap.utils.toArray<HTMLElement>(".pan-shot").forEach((el) => {
         gsap.to(el, {
-          backgroundPosition: "62% center",
+          backgroundPosition: el.dataset.panTarget || "62% center",
           ease: "none",
           scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: 1.1 },
         });
@@ -143,8 +162,23 @@ function App() {
 
   const submitOrder = () => {
     if (!backend.user) backend.signIn(name, phone);
-    const order = backend.checkout(address);
+    const order = backend.checkout(address, { name, phone });
+    const destination = locations.find((location) => location.name === selectedLocation) ?? locations[0];
+    const lines = order.items.map((line) => {
+      const item = menuItems.find((menuItem) => menuItem.id === line.id);
+      return item ? `- ${line.qty} x ${item.name} (${formatPrice(item.price * line.qty)})` : `- ${line.qty} x ${line.id}`;
+    });
+    const message = [
+      "Bonjour Chicken Master, je souhaite passer cette commande :",
+      ...lines,
+      `Total : ${formatPrice(order.total)}`,
+      `Nom : ${order.user.name}`,
+      `Telephone : ${order.user.phone}`,
+      `Adresse : ${order.address}`,
+      `Restaurant choisi : ${destination.name}`,
+    ].join("\n");
     setLastOrder(order.id.slice(0, 8).toUpperCase());
+    window.open(whatsappUrl(destination.waNumber, message), "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -172,10 +206,10 @@ function App() {
       </header>
 
       <main className="relative z-10">
-        <section id="home" className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_78%_25%,rgba(245,158,11,0.34),transparent_28%),radial-gradient(circle_at_18%_78%,rgba(239,78,34,0.22),transparent_32%),linear-gradient(135deg,#090705_0%,#180d08_46%,#050403_100%)]">
+        <section id="home" className="relative min-h-screen scroll-mt-28 overflow-hidden bg-[radial-gradient(circle_at_78%_25%,rgba(245,158,11,0.34),transparent_28%),radial-gradient(circle_at_18%_78%,rgba(239,78,34,0.22),transparent_32%),linear-gradient(135deg,#090705_0%,#180d08_46%,#050403_100%)]">
           <motion.video
             initial={{ scale: 1.04, opacity: 0 }}
-            animate={{ scale: 1, opacity: 0.58 }}
+            animate={{ scale: 1, opacity: 0.84 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
             className="absolute inset-0 h-full w-full object-cover"
             autoPlay
@@ -186,8 +220,8 @@ function App() {
             poster={assets.aiBucket}
             src={assets.heroVideo}
           />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,7,5,0.96)_0%,rgba(9,7,5,0.82)_43%,rgba(9,7,5,0.34)_100%),radial-gradient(circle_at_78%_36%,rgba(245,158,11,0.28),transparent_30%)]" />
-          <div className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(90deg,#fff_1px,transparent_1px),linear-gradient(#fff_1px,transparent_1px)] [background-size:64px_64px]" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,7,5,0.82)_0%,rgba(9,7,5,0.58)_44%,rgba(9,7,5,0.08)_100%),radial-gradient(circle_at_78%_36%,rgba(245,158,11,0.16),transparent_32%)]" />
+          <div className="absolute inset-0 opacity-[0.045] [background-image:linear-gradient(90deg,#fff_1px,transparent_1px),linear-gradient(#fff_1px,transparent_1px)] [background-size:64px_64px]" />
           <div className="absolute -right-32 top-20 h-96 w-96 rounded-full border border-ember/25" />
           <div className="absolute -right-16 top-36 h-64 w-64 rounded-full border border-flame/25" />
           <div className="relative mx-auto grid min-h-screen max-w-7xl items-center gap-10 px-5 pb-16 pt-32 lg:grid-cols-[1.05fr_0.95fr]">
@@ -268,14 +302,15 @@ function App() {
           </div>
         </section>
 
-        <section id="experience" className="relative">
+        <section id="experience" className="relative scroll-mt-28">
           {story.map((item, index) => {
             const Icon = item.icon;
             return (
               <article
                 key={item.n}
                 className="pan-shot reveal grid min-h-[520px] border-b border-white/10 bg-cover bg-center lg:grid-cols-[0.48fr_0.52fr]"
-                style={{ backgroundImage: `linear-gradient(90deg,#090705 0%,rgba(9,7,5,0.93) 35%,rgba(9,7,5,0.25) 100%),url(${item.image})` }}
+                data-pan-target={item.panTarget}
+                style={{ backgroundImage: `${item.shade},url(${item.image})`, backgroundPosition: item.position }}
               >
                 <div className="flex flex-col justify-center px-6 py-16 sm:px-12 lg:px-20">
                   <div className="mb-8 flex items-center gap-4 text-white/22">
@@ -298,7 +333,7 @@ function App() {
           })}
         </section>
 
-        <section id="menu" className="mx-auto max-w-7xl px-5 py-24">
+        <section id="menu" className="mx-auto max-w-7xl scroll-mt-28 px-5 py-24">
           <div className="reveal mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
             <div>
               <p className="text-sm font-black uppercase text-ember">Vraie carte Chicken Master</p>
@@ -365,7 +400,7 @@ function App() {
           </div>
         </section>
 
-        <section id="adresses" className="mx-auto max-w-7xl px-5 py-24">
+        <section id="adresses" className="mx-auto max-w-7xl scroll-mt-28 px-5 py-24">
           <div className="reveal mb-12">
             <p className="text-sm font-black uppercase text-ember">Retrouvez-nous</p>
             <h2 className="mt-3 font-display text-6xl uppercase leading-none text-white">Fass & Yoff</h2>
@@ -411,7 +446,7 @@ function App() {
           </div>
         </section>
 
-        <section id="commande" className="mx-auto grid max-w-7xl gap-8 px-5 py-24 lg:grid-cols-[0.9fr_1.1fr]">
+        <section id="commande" className="mx-auto grid max-w-7xl scroll-mt-28 gap-8 px-5 py-24 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="reveal rounded-lg border border-white/10 bg-white/[0.055] p-6 backdrop-blur-xl">
             <div className="mb-6 flex items-center gap-3">
               <UserRound className="text-ember" />
@@ -435,14 +470,42 @@ function App() {
               {menuItems
                 .filter((item) => (backend.cart[item.id] ?? 0) > 0)
                 .map((item) => (
-                  <div key={item.id} className="flex items-center justify-between gap-4 border-b border-white/10 py-3">
-                    <div>
+                  <div key={item.id} className="grid gap-3 border-b border-white/10 py-3 sm:grid-cols-[1fr_auto] sm:items-center">
+                    <div className="min-w-0">
                       <p className="font-black uppercase text-white">{item.name}</p>
-                      <p className="text-sm text-white/55">x{backend.cart[item.id]}</p>
+                      <p className="text-sm text-white/55">{formatPrice(item.price)} / pièce</p>
                     </div>
-                    <strong className="text-ember">{formatPrice(item.price * (backend.cart[item.id] ?? 0))}</strong>
+                    <div className="flex items-center justify-between gap-4 sm:justify-end">
+                      <div className="flex items-center gap-2">
+                        <Button variant="ghost" className="h-9 w-9 px-0" onClick={() => backend.remove(item.id)} aria-label={`Retirer ${item.name}`}>
+                          <Minus size={15} />
+                        </Button>
+                        <span className="grid h-9 min-w-9 place-items-center rounded-full bg-white/10 px-3 font-black text-white">
+                          {backend.cart[item.id] ?? 0}
+                        </span>
+                        <Button className="h-9 w-9 px-0" onClick={() => backend.add(item.id)} aria-label={`Ajouter ${item.name}`}>
+                          <Plus size={15} />
+                        </Button>
+                      </div>
+                      <strong className="min-w-28 text-right text-ember">{formatPrice(item.price * (backend.cart[item.id] ?? 0))}</strong>
+                    </div>
                   </div>
                 ))}
+            </div>
+            <label className="mb-4 mt-7 block text-xs font-black uppercase text-white/50">Restaurant WhatsApp</label>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {locations.map((location) => (
+                <button
+                  key={location.name}
+                  type="button"
+                  onClick={() => setSelectedLocation(location.name)}
+                  className={`rounded-md border px-4 py-3 text-left text-sm font-black uppercase transition ${
+                    selectedLocation === location.name ? "border-ember bg-ember text-coal" : "border-white/10 bg-black/35 text-white hover:border-ember/70"
+                  }`}
+                >
+                  {location.name}
+                </button>
+              ))}
             </div>
             <label className="mb-4 mt-7 block text-xs font-black uppercase text-white/50">Adresse de livraison</label>
             <input className="h-12 w-full rounded-md border border-white/10 bg-black/35 px-4 text-white outline-none focus:border-ember" value={address} onChange={(e) => setAddress(e.target.value)} />
@@ -452,10 +515,10 @@ function App() {
                 <p className="font-display text-5xl text-ember">{formatPrice(backend.total)}</p>
               </div>
               <Button onClick={submitOrder} disabled={backend.total === 0}>
-                Valider <ArrowRight size={18} />
+                Commander sur WhatsApp <ArrowRight size={18} />
               </Button>
             </div>
-            {lastOrder && <p className="mt-5 rounded-md bg-palm/30 p-4 text-sm font-bold text-white">Commande #{lastOrder} reçue. Préparation lancée.</p>}
+            {lastOrder && <p className="mt-5 rounded-md bg-palm/30 p-4 text-sm font-bold text-white">Commande #{lastOrder} prête à envoyer sur WhatsApp.</p>}
           </div>
         </section>
       </main>

@@ -12,7 +12,27 @@
       if (location.protocol === "file:") {
         location.href = "http://localhost:5173/";
       }
+
+      const isLocalDev = ["localhost", "127.0.0.1", "::1"].includes(location.hostname);
+
+      if (isLocalDev) {
+        const devScript = document.createElement("script");
+        devScript.type = "module";
+        devScript.src = "/chicken-master-preview/src/main.tsx";
+        document.body.appendChild(devScript);
+      } else {
+        const stylesheet = document.createElement("link");
+        stylesheet.rel = "stylesheet";
+        stylesheet.crossOrigin = "";
+        stylesheet.href = "/chicken-master-preview/assets/index-CLI-Te7t.css";
+        document.head.appendChild(stylesheet);
+
+        const appScript = document.createElement("script");
+        appScript.type = "module";
+        appScript.crossOrigin = "";
+        appScript.src = "/chicken-master-preview/assets/index-Sw_SiDUh.js";
+        document.body.appendChild(appScript);
+      }
     </script>
-    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

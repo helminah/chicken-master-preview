@@ -39,7 +39,7 @@ export const menuItems: MenuItem[] = [
     price: 3800,
     category: "Menus",
     badge: "Best-seller",
-    image: asset("chicken-master-bucket-ai.webp"),
+    image: asset("real-menu-1-cut.webp"),
   },
   {
     id: "menu-2",
@@ -48,7 +48,7 @@ export const menuItems: MenuItem[] = [
     price: 2800,
     category: "Menus",
     badge: "Classique",
-    image: asset("meal-box.jpg"),
+    image: asset("real-menu-2-cut.webp"),
   },
   {
     id: "burger-double",
@@ -75,7 +75,7 @@ export const menuItems: MenuItem[] = [
     price: 6000,
     category: "Fried Chicken",
     badge: "Croustillant",
-    image: asset("spice-roast.jpg"),
+    image: asset("real-crispy-chicken-cut.webp"),
   },
   {
     id: "wings-6",
@@ -84,7 +84,7 @@ export const menuItems: MenuItem[] = [
     price: 3500,
     category: "Fried Chicken",
     badge: "Croustillant",
-    image: asset("fryer.jpg"),
+    image: asset("real-wings-6-cut.webp"),
   },
   {
     id: "chawarma-poulet",
@@ -93,7 +93,7 @@ export const menuItems: MenuItem[] = [
     price: 2000,
     category: "Sandwichs",
     badge: "Classique",
-    image: asset("experience.jpg"),
+    image: asset("real-chawarma-cut.webp"),
   },
   {
     id: "frites",
