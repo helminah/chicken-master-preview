@@ -9,7 +9,8 @@ import { menuItems } from "./lib/store";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const asset = (name: string) => `${import.meta.env.BASE_URL}assets/${name}`;
+const ASSET_VERSION = "20260430-0531";
+const asset = (name: string) => `${import.meta.env.BASE_URL}assets/${name}?v=${ASSET_VERSION}`;
 
 const assets = {
   heroVideo: asset("chicken-hero.mp4"),

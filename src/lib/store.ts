@@ -28,7 +28,8 @@ const keys = {
   orders: "chicken-master:orders",
 };
 
-const asset = (name: string) => `${import.meta.env.BASE_URL}assets/${name}`;
+const ASSET_VERSION = "20260430-0531";
+const asset = (name: string) => `${import.meta.env.BASE_URL}assets/${name}?v=${ASSET_VERSION}`;
 
 export const menuItems: MenuItem[] = [
   {
