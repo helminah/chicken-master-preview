@@ -9,16 +9,18 @@ import { menuItems } from "./lib/store";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const asset = (name: string) => `${import.meta.env.BASE_URL}assets/${name}`;
+
 const assets = {
-  heroVideo: "/assets/chicken-hero.mp4",
-  logo: "/assets/chicken-master-logo-true.webp",
-  aiBucket: "/assets/chicken-master-bucket-ai.webp",
-  roast: "/assets/spice-roast.jpg",
-  fryer: "/assets/fryer.jpg",
-  experience: "/assets/experience.jpg",
-  renaissance: "/assets/renaissance.jpg",
-  box: "/assets/chicken-master-bucket-ai.webp",
-  frites: "/assets/real-fries-cut.webp",
+  heroVideo: asset("chicken-hero.mp4"),
+  logo: asset("chicken-master-logo-true.webp"),
+  aiBucket: asset("chicken-master-bucket-ai.webp"),
+  roast: asset("spice-roast.jpg"),
+  fryer: asset("fryer.jpg"),
+  experience: asset("experience.jpg"),
+  renaissance: asset("renaissance.jpg"),
+  box: asset("chicken-master-bucket-ai.webp"),
+  frites: asset("real-fries-cut.webp"),
 };
 
 const story = [

@@ -28,6 +28,8 @@ const keys = {
   orders: "chicken-master:orders",
 };
 
+const asset = (name: string) => `${import.meta.env.BASE_URL}assets/${name}`;
+
 export const menuItems: MenuItem[] = [
   {
     id: "menu-1",
@@ -36,7 +38,7 @@ export const menuItems: MenuItem[] = [
     price: 3800,
     category: "Menus",
     badge: "Best-seller",
-    image: "/assets/chicken-master-bucket-ai.webp",
+    image: asset("chicken-master-bucket-ai.webp"),
   },
   {
     id: "menu-2",
@@ -45,7 +47,7 @@ export const menuItems: MenuItem[] = [
     price: 2800,
     category: "Menus",
     badge: "Classique",
-    image: "/assets/meal-box.jpg",
+    image: asset("meal-box.jpg"),
   },
   {
     id: "burger-double",
@@ -54,7 +56,7 @@ export const menuItems: MenuItem[] = [
     price: 3000,
     category: "Burgers",
     badge: "Best-seller",
-    image: "/assets/real-burger-double-cut.webp",
+    image: asset("real-burger-double-cut.webp"),
   },
   {
     id: "mix-bucket",
@@ -63,7 +65,7 @@ export const menuItems: MenuItem[] = [
     price: 6000,
     category: "Fried Chicken",
     badge: "Croustillant",
-    image: "/assets/chicken-master-bucket-ai.webp",
+    image: asset("chicken-master-bucket-ai.webp"),
   },
   {
     id: "crispy-chicken",
@@ -72,7 +74,7 @@ export const menuItems: MenuItem[] = [
     price: 6000,
     category: "Fried Chicken",
     badge: "Croustillant",
-    image: "/assets/spice-roast.jpg",
+    image: asset("spice-roast.jpg"),
   },
   {
     id: "wings-6",
@@ -81,7 +83,7 @@ export const menuItems: MenuItem[] = [
     price: 3500,
     category: "Fried Chicken",
     badge: "Croustillant",
-    image: "/assets/fryer.jpg",
+    image: asset("fryer.jpg"),
   },
   {
     id: "chawarma-poulet",
@@ -90,7 +92,7 @@ export const menuItems: MenuItem[] = [
     price: 2000,
     category: "Sandwichs",
     badge: "Classique",
-    image: "/assets/experience.jpg",
+    image: asset("experience.jpg"),
   },
   {
     id: "frites",
@@ -99,7 +101,7 @@ export const menuItems: MenuItem[] = [
     price: 500,
     category: "Snacks",
     badge: "Frais",
-    image: "/assets/real-fries-cut.webp",
+    image: asset("real-fries-cut.webp"),
   },
 ];
 
