@@ -1,0 +1,17 @@
+<svg width="640" height="640" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Chicken Master">
+  <path d="M70 186C86 92 180 42 320 42C460 42 554 92 570 186C574 211 558 232 533 232H107C82 232 66 211 70 186Z" fill="#E69A58"/>
+  <path d="M92 182C117 111 198 74 320 74C442 74 523 111 548 182H92Z" fill="#F0AF68" opacity=".72"/>
+  <path d="M118 278H522" stroke="#E9C351" stroke-width="46" stroke-linecap="round"/>
+  <rect x="70" y="282" width="500" height="126" rx="26" fill="#6B4A3D"/>
+  <text x="320" y="334" text-anchor="middle" font-family="Impact, Haettenschweiler, 'Arial Black', sans-serif" font-size="70" letter-spacing="2" fill="#F4B640">CHICKEN</text>
+  <text x="320" y="394" text-anchor="middle" font-family="Impact, Haettenschweiler, 'Arial Black', sans-serif" font-size="70" letter-spacing="2" fill="#F4B640">MASTER</text>
+  <path d="M118 456H522" stroke="#12A653" stroke-width="22" stroke-linecap="round"/>
+  <path d="M70 500C86 590 179 628 320 628C461 628 554 590 570 500C574 475 558 454 533 454H107C82 454 66 475 70 500Z" fill="#E69A58"/>
+  <path d="M92 504C118 571 199 598 320 598C441 598 522 571 548 504H92Z" fill="#F0AF68" opacity=".55"/>
+  <g fill="#F6DFA5" opacity=".75">
+    <ellipse cx="234" cy="92" rx="16" ry="5" transform="rotate(-8 234 92)"/>
+    <ellipse cx="303" cy="78" rx="16" ry="5" transform="rotate(4 303 78)"/>
+    <ellipse cx="374" cy="93" rx="16" ry="5" transform="rotate(11 374 93)"/>
+    <ellipse cx="444" cy="116" rx="16" ry="5" transform="rotate(16 444 116)"/>
+  </g>
+</svg>
