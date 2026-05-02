@@ -183,13 +183,13 @@ function App() {
 
   return (
     <div ref={root} className="relative min-h-screen overflow-hidden bg-coal text-cream">
-      <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-black/45 backdrop-blur-xl">
-        <nav className="mx-auto flex h-24 max-w-7xl items-center justify-between px-5">
-          <a href="#home" className="nav-item flex items-center gap-3">
-            <span className="block h-20 w-20 overflow-hidden bg-transparent">
+      <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-black/55 backdrop-blur-xl">
+        <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:h-20 sm:px-5 lg:h-24">
+          <a href="#home" className="nav-item flex min-w-0 items-center gap-2 sm:gap-3">
+            <span className="block h-12 w-12 shrink-0 overflow-hidden bg-transparent sm:h-16 sm:w-16 lg:h-20 lg:w-20">
               <img className="h-full w-full object-contain" src={assets.logo} alt="Chicken Master" />
             </span>
-            <span className="hidden font-display text-2xl uppercase leading-none sm:block">
+            <span className="block font-display text-xl uppercase leading-none sm:text-2xl">
               Chicken <span className="block text-ember">Master</span>
             </span>
           </a>
@@ -199,14 +199,15 @@ function App() {
             <a href="#adresses">Adresses</a>
             <a href="#commande">Commander</a>
           </div>
-          <Button className="nav-item h-11" onClick={() => document.querySelector("#commande")?.scrollIntoView({ behavior: "smooth" })}>
-            Commander <ArrowRight size={16} />
+          <Button className="nav-item h-10 w-10 shrink-0 px-0 sm:h-11 sm:w-auto sm:px-5" onClick={() => document.querySelector("#commande")?.scrollIntoView({ behavior: "smooth" })}>
+            <span className="hidden sm:inline">Commander</span>
+            <ArrowRight size={16} />
           </Button>
         </nav>
       </header>
 
       <main className="relative z-10">
-        <section id="home" className="relative min-h-screen scroll-mt-28 overflow-hidden bg-[radial-gradient(circle_at_78%_25%,rgba(245,158,11,0.34),transparent_28%),radial-gradient(circle_at_18%_78%,rgba(239,78,34,0.22),transparent_32%),linear-gradient(135deg,#090705_0%,#180d08_46%,#050403_100%)]">
+        <section id="home" className="relative min-h-[100svh] scroll-mt-24 overflow-hidden bg-[radial-gradient(circle_at_78%_25%,rgba(245,158,11,0.34),transparent_28%),radial-gradient(circle_at_18%_78%,rgba(239,78,34,0.22),transparent_32%),linear-gradient(135deg,#090705_0%,#180d08_46%,#050403_100%)] sm:scroll-mt-28">
           <motion.video
             initial={{ scale: 1.04, opacity: 0 }}
             animate={{ scale: 1, opacity: 0.84 }}
@@ -224,12 +225,12 @@ function App() {
           <div className="absolute inset-0 opacity-[0.045] [background-image:linear-gradient(90deg,#fff_1px,transparent_1px),linear-gradient(#fff_1px,transparent_1px)] [background-size:64px_64px]" />
           <div className="absolute -right-32 top-20 h-96 w-96 rounded-full border border-ember/25" />
           <div className="absolute -right-16 top-36 h-64 w-64 rounded-full border border-flame/25" />
-          <div className="relative mx-auto grid min-h-screen max-w-7xl items-center gap-10 px-5 pb-16 pt-32 lg:grid-cols-[1.05fr_0.95fr]">
-            <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-3xl">
-              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-ember/35 bg-black/35 px-4 py-2 text-xs font-black uppercase text-ember">
+          <div className="relative mx-auto grid min-h-[100svh] w-full max-w-7xl items-center gap-7 px-4 pb-10 pt-24 sm:gap-10 sm:px-5 sm:pb-16 sm:pt-32 lg:grid-cols-[1.05fr_0.95fr]">
+            <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="w-[calc(100vw-2rem)] min-w-0 max-w-full sm:w-auto sm:max-w-3xl">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-ember/35 bg-black/45 px-3 py-2 text-[0.68rem] font-black uppercase text-ember sm:mb-5 sm:px-4 sm:text-xs">
                 <Star size={15} fill="currentColor" /> Note 4.1/5 - Dakar, Senegal
               </div>
-              <h1 className="font-display text-[clamp(4rem,12vw,10.5rem)] uppercase leading-[0.82] text-white drop-shadow-[0_8px_28px_rgba(0,0,0,0.85)]">
+              <h1 className="max-w-full overflow-hidden font-display text-[clamp(2.9rem,14vw,10.5rem)] uppercase leading-[0.88] text-white drop-shadow-[0_8px_28px_rgba(0,0,0,0.85)] sm:leading-[0.82]">
                 <span className="block overflow-hidden pb-2">
                   <span className="hero-word block">Chicken</span>
                 </span>
@@ -237,8 +238,8 @@ function App() {
                   <span className="hero-word block">Master</span>
                 </span>
               </h1>
-              <div className="mt-3 max-w-xl overflow-hidden border-y border-ember/30 py-2 text-sm font-black uppercase text-ember">
-                <div className="hero-kicker flex w-[200%] gap-6 whitespace-nowrap">
+              <div className="mt-2 w-full max-w-xl overflow-hidden border-y border-ember/30 py-2 text-xs font-black uppercase text-ember sm:mt-3 sm:text-sm">
+                <div className="hero-kicker flex w-[220%] gap-5 whitespace-nowrap sm:w-[200%] sm:gap-6">
                   <span>Frit sur commande</span>
                   <span>Big Burger</span>
                   <span>Mix Bucket</span>
@@ -253,19 +254,19 @@ function App() {
                   <span>Yoff</span>
                 </div>
               </div>
-              <p className="mt-6 max-w-xl text-lg font-semibold leading-8 text-white drop-shadow-[0_3px_14px_rgba(0,0,0,0.75)]">
+              <p className="mt-5 max-w-xl text-base font-semibold leading-7 text-white drop-shadow-[0_3px_14px_rgba(0,0,0,0.75)] sm:mt-6 sm:text-lg sm:leading-8">
                 Le meilleur poulet frit de Dakar. Fass et Yoff, ouvert de 9h à minuit, commande rapide par WhatsApp.
               </p>
-              <div className="mt-6 grid max-w-xl gap-3 text-sm font-bold text-white sm:grid-cols-3">
-                <span className="rounded-md border border-ember/25 bg-black/55 px-3 py-3 backdrop-blur">Fass CAD</span>
-                <span className="rounded-md border border-ember/25 bg-black/55 px-3 py-3 backdrop-blur">Yoff VDN</span>
-                <span className="rounded-md border border-ember/25 bg-black/55 px-3 py-3 backdrop-blur">Livraison</span>
+              <div className="mt-5 grid max-w-xl grid-cols-3 gap-2 text-xs font-bold text-white sm:mt-6 sm:gap-3 sm:text-sm">
+                <span className="rounded-md border border-ember/25 bg-black/60 px-2 py-3 text-center backdrop-blur sm:px-3 sm:text-left">Fass CAD</span>
+                <span className="rounded-md border border-ember/25 bg-black/60 px-2 py-3 text-center backdrop-blur sm:px-3 sm:text-left">Yoff VDN</span>
+                <span className="rounded-md border border-ember/25 bg-black/60 px-2 py-3 text-center backdrop-blur sm:px-3 sm:text-left">Livraison</span>
               </div>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Button onClick={() => document.querySelector("#menu")?.scrollIntoView({ behavior: "smooth" })}>
+              <div className="mt-7 grid grid-cols-1 gap-3 sm:mt-8 sm:flex sm:flex-wrap">
+                <Button className="w-full sm:w-auto" onClick={() => document.querySelector("#menu")?.scrollIntoView({ behavior: "smooth" })}>
                   Voir le menu <ShoppingBag size={18} />
                 </Button>
-                <Button variant="outline" onClick={() => window.open(locations[0].whatsapp, "_blank", "noopener,noreferrer")}>
+                <Button className="w-full sm:w-auto" variant="outline" onClick={() => window.open(locations[0].whatsapp, "_blank", "noopener,noreferrer")}>
                   WhatsApp <Phone size={18} />
                 </Button>
               </div>
@@ -274,17 +275,17 @@ function App() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.25, duration: 0.9 }}
-              className="grid gap-4"
+              className="grid gap-3 sm:gap-4"
             >
               <div className="overflow-visible rounded-lg border border-white/10 bg-[radial-gradient(circle_at_50%_30%,rgba(245,158,11,0.28),rgba(0,0,0,0.62)_48%,rgba(0,0,0,0.9)_100%)] p-3 shadow-ember sm:p-6">
-                <img className="h-auto max-h-[430px] w-full object-contain drop-shadow-[0_24px_42px_rgba(0,0,0,0.75)]" src={assets.aiBucket} alt="Bucket Chicken Master" />
+                <img className="h-auto max-h-[300px] w-full object-contain drop-shadow-[0_24px_42px_rgba(0,0,0,0.75)] sm:max-h-[430px]" src={assets.aiBucket} alt="Bucket Chicken Master" />
               </div>
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-3 gap-2 sm:gap-4">
                 {[assets.experience, assets.roast, assets.frites].map((image) => (
                   <motion.img
                     key={image}
                     whileHover={{ y: -8, scale: 1.04 }}
-                    className="h-28 w-full rounded-lg border border-white/10 bg-black/45 object-contain p-2 drop-shadow-[0_12px_24px_rgba(0,0,0,0.65)]"
+                    className="h-20 w-full rounded-lg border border-white/10 bg-black/45 object-contain p-2 drop-shadow-[0_12px_24px_rgba(0,0,0,0.65)] sm:h-28"
                     src={image}
                     alt=""
                   />
@@ -294,31 +295,31 @@ function App() {
           </div>
         </section>
 
-        <section className="border-y border-white/10 bg-ember py-4 text-coal">
-          <div className="flex w-[200%] animate-marquee gap-8 whitespace-nowrap font-display text-4xl uppercase">
+        <section className="overflow-hidden border-y border-white/10 bg-ember py-3 text-coal sm:py-4">
+          <div className="flex w-[260%] animate-marquee gap-6 whitespace-nowrap font-display text-2xl uppercase sm:w-[200%] sm:gap-8 sm:text-4xl">
             {Array.from({ length: 10 }).map((_, index) => (
               <span key={index}>Crispy Dakar • Sauce Master • Livraison chaude • Poulet feu •</span>
             ))}
           </div>
         </section>
 
-        <section id="experience" className="relative scroll-mt-28">
+        <section id="experience" className="relative scroll-mt-24 sm:scroll-mt-28">
           {story.map((item, index) => {
             const Icon = item.icon;
             return (
               <article
                 key={item.n}
-                className="pan-shot reveal grid min-h-[520px] border-b border-white/10 bg-cover bg-center lg:grid-cols-[0.48fr_0.52fr]"
+                className="pan-shot reveal grid min-h-[500px] border-b border-white/10 bg-cover bg-center sm:min-h-[520px] lg:grid-cols-[0.48fr_0.52fr]"
                 data-pan-target={item.panTarget}
                 style={{ backgroundImage: `${item.shade},url(${item.image})`, backgroundPosition: item.position }}
               >
-                <div className="flex flex-col justify-center px-6 py-16 sm:px-12 lg:px-20">
-                  <div className="mb-8 flex items-center gap-4 text-white/22">
-                    <span className="font-display text-7xl">{item.n}</span>
+                <div className="flex flex-col justify-center px-5 py-12 sm:px-12 sm:py-16 lg:px-20">
+                  <div className="mb-6 flex items-center gap-4 text-white/22 sm:mb-8">
+                    <span className="font-display text-5xl sm:text-7xl">{item.n}</span>
                     <span className="h-px w-20 bg-white/25" />
                   </div>
                   <Icon className="mb-5 text-ember" size={34} />
-                  <h2 className="font-display text-5xl uppercase leading-none text-white sm:text-6xl">
+                  <h2 className="font-display text-4xl uppercase leading-none text-white sm:text-6xl">
                     {item.title.split(" ")[0]} <span className="block text-ember">{item.title.split(" ").slice(1).join(" ")}</span>
                   </h2>
                   <p className="mt-6 max-w-sm text-base leading-7 text-white/76">{item.body}</p>
@@ -333,11 +334,11 @@ function App() {
           })}
         </section>
 
-        <section id="menu" className="mx-auto max-w-7xl scroll-mt-28 px-5 py-24">
-          <div className="reveal mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+        <section id="menu" className="mx-auto max-w-7xl scroll-mt-24 px-4 py-16 sm:scroll-mt-28 sm:px-5 sm:py-24">
+          <div className="reveal mb-9 flex flex-col justify-between gap-5 sm:mb-12 md:flex-row md:items-end">
             <div>
               <p className="text-sm font-black uppercase text-ember">Vraie carte Chicken Master</p>
-              <h2 className="mt-3 font-display text-6xl uppercase leading-none text-white">Les classiques</h2>
+              <h2 className="mt-3 font-display text-5xl uppercase leading-none text-white sm:text-6xl">Les classiques</h2>
             </div>
               <p className="max-w-md text-white/65">Burgers, buckets, ailes croustillantes, frites dorées et boissons fraîches, préparés pour les grosses faims de Dakar.</p>
           </div>
@@ -348,7 +349,7 @@ function App() {
                 whileHover={{ y: -6, scale: 1.01 }}
                 className="reveal overflow-hidden rounded-lg border border-white/10 bg-white/[0.055] backdrop-blur"
               >
-                <div className="h-56 overflow-hidden bg-[radial-gradient(circle_at_50%_30%,rgba(245,158,11,0.24),rgba(0,0,0,0.35)_44%,rgba(0,0,0,0.82)_100%)] p-4">
+                <div className="h-48 overflow-hidden bg-[radial-gradient(circle_at_50%_30%,rgba(245,158,11,0.24),rgba(0,0,0,0.35)_44%,rgba(0,0,0,0.82)_100%)] p-4 sm:h-56">
                   <motion.img
                     whileHover={{ scale: 1.08, rotate: -1 }}
                     transition={{ duration: 0.7 }}
@@ -357,10 +358,10 @@ function App() {
                     alt=""
                   />
                 </div>
-                <div className="p-5">
+                <div className="p-4 sm:p-5">
                   <div className="mb-3 flex items-start justify-between gap-3">
                     <div>
-                      <h3 className="font-display text-3xl uppercase text-white">{item.name}</h3>
+                      <h3 className="font-display text-2xl uppercase text-white sm:text-3xl">{item.name}</h3>
                       <p className="mt-1 text-xs font-black uppercase text-ember/80">{item.category}</p>
                       <p className="mt-2 text-sm leading-6 text-white/66">{item.description}</p>
                     </div>
@@ -386,31 +387,31 @@ function App() {
           </div>
         </section>
 
-        <section className="reveal relative min-h-[520px] overflow-hidden">
+        <section className="reveal relative min-h-[460px] overflow-hidden sm:min-h-[520px]">
           <img className="absolute inset-0 h-full w-full object-cover" src={assets.experience} alt="" />
           <div className="absolute inset-0 bg-gradient-to-r from-coal via-coal/72 to-transparent" />
-          <div className="relative mx-auto flex min-h-[520px] max-w-7xl items-center px-5">
+          <div className="relative mx-auto flex min-h-[460px] max-w-7xl items-center px-4 sm:min-h-[520px] sm:px-5">
             <div className="max-w-xl">
               <ShieldCheck className="mb-5 text-ember" size={42} />
-              <h2 className="font-display text-6xl uppercase leading-none text-white">Le goût qui réveille Dakar</h2>
-              <p className="mt-6 text-lg leading-8 text-white/72">
+              <h2 className="font-display text-5xl uppercase leading-none text-white sm:text-6xl">Le goût qui réveille Dakar</h2>
+              <p className="mt-5 text-base leading-7 text-white/72 sm:mt-6 sm:text-lg sm:leading-8">
                 Une panure dorée, des pièces servies chaudes, des sauces généreuses et cette odeur de poulet frit qui donne envie de commander tout de suite.
               </p>
             </div>
           </div>
         </section>
 
-        <section id="adresses" className="mx-auto max-w-7xl scroll-mt-28 px-5 py-24">
+        <section id="adresses" className="mx-auto max-w-7xl scroll-mt-24 px-4 py-16 sm:scroll-mt-28 sm:px-5 sm:py-24">
           <div className="reveal mb-12">
             <p className="text-sm font-black uppercase text-ember">Retrouvez-nous</p>
-            <h2 className="mt-3 font-display text-6xl uppercase leading-none text-white">Fass & Yoff</h2>
+            <h2 className="mt-3 font-display text-5xl uppercase leading-none text-white sm:text-6xl">Fass & Yoff</h2>
             <p className="mt-5 max-w-2xl text-white/65">Deux adresses à Dakar, ouvertes tous les jours de 9h à 00h. Commande directe par téléphone ou WhatsApp.</p>
           </div>
           <div className="grid gap-5 md:grid-cols-2">
             {locations.map((location) => (
               <article key={location.name} className="reveal rounded-lg border border-white/10 bg-white/[0.055] p-6 backdrop-blur">
                 <MapPin className="mb-5 text-ember" size={34} />
-                <h3 className="font-display text-4xl uppercase text-white">{location.name}</h3>
+                <h3 className="font-display text-3xl uppercase text-white sm:text-4xl">{location.name}</h3>
                 <p className="mt-3 text-white/70">{location.address}</p>
                 <div className="mt-5 flex flex-wrap gap-3 text-sm text-white/68">
                   <span className="inline-flex items-center gap-2 rounded-full bg-black/30 px-4 py-2">
@@ -435,7 +436,7 @@ function App() {
             {mapEmbeds.map((map) => (
               <div key={map.title} className="reveal overflow-hidden rounded-lg border border-white/10 bg-black/45">
                 <iframe
-                  className="h-[360px] w-full"
+                  className="h-[300px] w-full sm:h-[360px]"
                   src={map.src}
                   title={map.title}
                   loading="lazy"
@@ -446,11 +447,11 @@ function App() {
           </div>
         </section>
 
-        <section id="commande" className="mx-auto grid max-w-7xl scroll-mt-28 gap-8 px-5 py-24 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="reveal rounded-lg border border-white/10 bg-white/[0.055] p-6 backdrop-blur-xl">
+        <section id="commande" className="mx-auto grid max-w-7xl scroll-mt-24 gap-6 px-4 py-16 sm:scroll-mt-28 sm:gap-8 sm:px-5 sm:py-24 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="reveal rounded-lg border border-white/10 bg-white/[0.055] p-4 backdrop-blur-xl sm:p-6">
             <div className="mb-6 flex items-center gap-3">
               <UserRound className="text-ember" />
-              <h2 className="font-display text-4xl uppercase text-white">Compte express</h2>
+              <h2 className="font-display text-3xl uppercase text-white sm:text-4xl">Compte express</h2>
             </div>
             <label className="mb-4 block text-xs font-black uppercase text-white/50">Nom</label>
             <input className="mb-5 h-12 w-full rounded-md border border-white/10 bg-black/35 px-4 text-white outline-none focus:border-ember" value={name} onChange={(e) => setName(e.target.value)} />
@@ -464,8 +465,8 @@ function App() {
             </div>
           </div>
 
-          <div className="reveal rounded-lg border border-ember/35 bg-black/55 p-6 shadow-ember backdrop-blur-xl">
-            <h2 className="font-display text-5xl uppercase text-white">Commande Master</h2>
+          <div className="reveal rounded-lg border border-ember/35 bg-black/55 p-4 shadow-ember backdrop-blur-xl sm:p-6">
+            <h2 className="font-display text-4xl uppercase text-white sm:text-5xl">Commande Master</h2>
             <div className="mt-6 space-y-3">
               {menuItems
                 .filter((item) => (backend.cart[item.id] ?? 0) > 0)
@@ -475,7 +476,7 @@ function App() {
                       <p className="font-black uppercase text-white">{item.name}</p>
                       <p className="text-sm text-white/55">{formatPrice(item.price)} / pièce</p>
                     </div>
-                    <div className="flex items-center justify-between gap-4 sm:justify-end">
+                    <div className="flex items-center justify-between gap-3 sm:justify-end sm:gap-4">
                       <div className="flex items-center gap-2">
                         <Button variant="ghost" className="h-9 w-9 px-0" onClick={() => backend.remove(item.id)} aria-label={`Retirer ${item.name}`}>
                           <Minus size={15} />
@@ -487,7 +488,7 @@ function App() {
                           <Plus size={15} />
                         </Button>
                       </div>
-                      <strong className="min-w-28 text-right text-ember">{formatPrice(item.price * (backend.cart[item.id] ?? 0))}</strong>
+                      <strong className="min-w-24 text-right text-sm text-ember sm:min-w-28 sm:text-base">{formatPrice(item.price * (backend.cart[item.id] ?? 0))}</strong>
                     </div>
                   </div>
                 ))}
@@ -512,9 +513,9 @@ function App() {
             <div className="mt-7 flex flex-wrap items-center justify-between gap-4">
               <div>
                 <p className="text-sm uppercase text-white/45">Total</p>
-                <p className="font-display text-5xl text-ember">{formatPrice(backend.total)}</p>
+                <p className="font-display text-4xl text-ember sm:text-5xl">{formatPrice(backend.total)}</p>
               </div>
-              <Button onClick={submitOrder} disabled={backend.total === 0}>
+              <Button className="w-full sm:w-auto" onClick={submitOrder} disabled={backend.total === 0}>
                 Commander sur WhatsApp <ArrowRight size={18} />
               </Button>
             </div>

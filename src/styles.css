@@ -13,13 +13,29 @@
 
 html {
   scroll-behavior: smooth;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
   background: #090705;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 a {
@@ -43,7 +59,7 @@ input {
 
 @media (max-width: 767px) {
   .pan-shot {
-    min-height: 620px;
-    background-position: 62% center;
+    min-height: 500px;
+    background-position: 58% center;
   }
 }
