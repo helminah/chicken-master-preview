@@ -5,33 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#090705" />
     <title>Chicken Master Dakar</title>
+    <script type="module" crossorigin src="/chicken-master-preview/assets/index-D-vyGqpy.js"></script>
+    <link rel="stylesheet" crossorigin href="/chicken-master-preview/assets/index-BGpxjvB_.css">
   </head>
   <body>
     <div id="root"></div>
     <script>
       if (location.protocol === "file:") {
         location.href = "http://localhost:5173/";
-      }
-
-      const isLocalDev = ["localhost", "127.0.0.1", "::1"].includes(location.hostname);
-
-      if (isLocalDev) {
-        const devScript = document.createElement("script");
-        devScript.type = "module";
-        devScript.src = "/chicken-master-preview/src/main.tsx";
-        document.body.appendChild(devScript);
-      } else {
-        const stylesheet = document.createElement("link");
-        stylesheet.rel = "stylesheet";
-        stylesheet.crossOrigin = "";
-        stylesheet.href = "/chicken-master-preview/assets/index-B7iCLZmv.css";
-        document.head.appendChild(stylesheet);
-
-        const appScript = document.createElement("script");
-        appScript.type = "module";
-        appScript.crossOrigin = "";
-        appScript.src = "/chicken-master-preview/assets/index-Bh4MX7R6.js";
-        document.body.appendChild(appScript);
       }
     </script>
   </body>

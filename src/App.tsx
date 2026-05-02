@@ -13,7 +13,9 @@ const ASSET_VERSION = "20260430-0531";
 const asset = (name: string) => `${import.meta.env.BASE_URL}assets/${name}?v=${ASSET_VERSION}`;
 
 const assets = {
-  heroVideo: asset("chicken-hero.mp4"),
+  heroVideo: asset("chicken-hero-faststart.mp4"),
+  heroVideoSafari: asset("chicken-hero-safari.mp4"),
+  heroPoster: asset("chicken-master-cover.jpeg"),
   logo: asset("chicken-master-logo-true.webp"),
   aiBucket: asset("chicken-master-bucket-ai.webp"),
   roast: asset("spice-roast.jpg"),
@@ -212,16 +214,18 @@ function App() {
             initial={{ scale: 1.04, opacity: 0 }}
             animate={{ scale: 1, opacity: 0.84 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover object-[76%_center] sm:object-center"
             autoPlay
             muted
             loop
             playsInline
             preload="metadata"
-            poster={assets.aiBucket}
-            src={assets.heroVideo}
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,7,5,0.82)_0%,rgba(9,7,5,0.58)_44%,rgba(9,7,5,0.08)_100%),radial-gradient(circle_at_78%_36%,rgba(245,158,11,0.16),transparent_32%)]" />
+            poster={assets.heroPoster}
+          >
+            <source src={assets.heroVideo} type='video/mp4; codecs="avc1.64001f, mp4a.40.2"' />
+            <source src={assets.heroVideoSafari} type='video/mp4; codecs="avc1.42E01F, mp4a.40.2"' />
+          </motion.video>
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,7,5,0.82)_0%,rgba(9,7,5,0.54)_46%,rgba(9,7,5,0.02)_100%),radial-gradient(circle_at_78%_36%,rgba(245,158,11,0.12),transparent_32%)]" />
           <div className="absolute inset-0 opacity-[0.045] [background-image:linear-gradient(90deg,#fff_1px,transparent_1px),linear-gradient(#fff_1px,transparent_1px)] [background-size:64px_64px]" />
           <div className="absolute -right-32 top-20 h-96 w-96 rounded-full border border-ember/25" />
           <div className="absolute -right-16 top-36 h-64 w-64 rounded-full border border-flame/25" />
